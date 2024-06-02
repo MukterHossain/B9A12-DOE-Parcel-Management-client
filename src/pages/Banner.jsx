@@ -3,7 +3,7 @@
 const Banner = () => {
     return (
         <div>
-            <div className="hero min-h-screen rounded-sm my-12" style={{ backgroundImage: 'url(https://i.ibb.co/YLrgyqr/banner.jpg)' }}>
+            <div className="hero min-h-screen rounded-sm " style={{ backgroundImage: 'url(https://i.ibb.co/YLrgyqr/banner.jpg)' }}>
                 <div className="hero-overlay bg-opacity-60 rounded-sm"></div>
                 <div className=" ">
                     <div className="text-center">
