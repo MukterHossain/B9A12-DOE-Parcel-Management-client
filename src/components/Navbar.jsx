@@ -18,11 +18,8 @@ const Navbar = () => {
 
     const navOption = <>
         <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/menu'>Our Menu</NavLink></li>
-        <li><NavLink to='/order/salad'>Order Food</NavLink></li>
-
-
-
+        {/* <li><NavLink to='/menu'>Our Menu</NavLink></li>
+        <li><NavLink to='/order/salad'>Order Food</NavLink></li> */}
     </>
     {
         // ternary operator
