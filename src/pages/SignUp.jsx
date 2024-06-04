@@ -7,22 +7,32 @@ import { useForm } from "react-hook-form";
 
 
 const SignUp = () => {
-    // const axiosPublic = useAxiosPublic()
+    // const axiosPublic = useAxiosPublic() 
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
     const { createUser, updateUserProfile } = useContext(AuthContext)
     const navigate = useNavigate()
 
 
     const onSubmit = data => {
-        // console.log(data)
         createUser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
-                        // console.log('user profile info updated')
-                        //create user entry in the database
+                        console.log('user profile info updated')
+                        // create user entry in the database
+                        reset()
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Sign up successfully",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+
+
                         // const userInfo = {
                         //     name: data.name,
                         //     email: data.email
@@ -42,20 +52,15 @@ const SignUp = () => {
                         //             navigate('/')
                         //         }
                         //     })
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "Sign up successfully",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
+                       
                         navigate('/')
 
                     })
-                    .catch(error => console.log(error))
+                    .catch(err => console.log(err))
             })
     }
     // console.log(watch("example"))
+
     return (
         <>
             <Helmet>

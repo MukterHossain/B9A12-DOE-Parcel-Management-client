@@ -20,6 +20,7 @@ const Navbar = () => {
     const navOption = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+        <li><NavLink to='/demo'>Demo</NavLink></li>
         {/* <li><NavLink to='/order/salad'>Order Food</NavLink></li> */}
     </>
     {
@@ -88,6 +89,7 @@ const Navbar = () => {
                                     <img
                                         className='rounded-full'
                                         referrerPolicy='no-referrer'
+                                        title={user?.displayName}
                                         src={user && user.photoURL ? user.photoURL : avatarImg}
 
                                         alt='profile'
