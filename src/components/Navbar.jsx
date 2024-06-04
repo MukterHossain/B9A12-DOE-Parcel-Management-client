@@ -111,13 +111,13 @@ const Navbar = () => {
                                         <>
                                             <Link
                                                 to='/dashboard'
-                                                className='block  px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                                className='block  px-4 py-3 hover:bg-neutral-100 text-black  transition font-semibold'
                                             >
                                                 Dashboard
                                             </Link>
                                             <div
                                                 // onClick={logOut}
-                                                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
+                                                className='px-4 py-3 hover:bg-neutral-100 text-black  transition font-semibold cursor-pointer'
                                             >
                                                 Logout
                                             </div>
@@ -126,13 +126,13 @@ const Navbar = () => {
                                         <>
                                             <Link
                                                 to='/login'
-                                                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                                className='px-4 py-3 hover:bg-neutral-100 text-black transition font-semibold'
                                             >
                                                 Login
                                             </Link>
                                             <Link
                                                 to='/signup'
-                                                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                                className='px-4 py-3 hover:bg-neutral-100 text-black  transition font-semibold'
                                             >
                                                 Sign Up
                                             </Link>
