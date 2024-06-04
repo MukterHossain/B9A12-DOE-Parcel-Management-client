@@ -1,25 +1,26 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from '../assets/logo.png'
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import avatarImg from '../assets/profile.jpg'
 
 
 const Navbar = () => {
-    // const { user, logOut } = useAuth()
-    const { user } = useState()
+    const { user, logOutUser } = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
 
 
 
-    // const handleLogOut = () => {
-    //     logOut()
-    //         .then(() => { })
-    //         .then(error => console.log(error))
-    // }
+    const handleLogOut = () => {
+        logOutUser()
+            .then(() => { })
+            .catch(error => console.log(error))
+    }
 
     const navOption = <>
         <li><NavLink to='/'>Home</NavLink></li>
-        {/* <li><NavLink to='/menu'>Our Menu</NavLink></li>
-        <li><NavLink to='/order/salad'>Order Food</NavLink></li> */}
+        <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+        {/* <li><NavLink to='/order/salad'>Order Food</NavLink></li> */}
     </>
     {
         // ternary operator
@@ -87,7 +88,7 @@ const Navbar = () => {
                                     <img
                                         className='rounded-full'
                                         referrerPolicy='no-referrer'
-                                        // src={user && user.photoURL ? user.photoURL : avatarImg}
+                                        src={user && user.photoURL ? user.photoURL : avatarImg}
 
                                         alt='profile'
                                         height='30'
@@ -116,7 +117,7 @@ const Navbar = () => {
                                                 Dashboard
                                             </Link>
                                             <div
-                                                // onClick={logOut}
+                                                onClick={handleLogOut}
                                                 className='px-4 py-3 hover:bg-neutral-100 text-black  transition font-semibold cursor-pointer'
                                             >
                                                 Logout
