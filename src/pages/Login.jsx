@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 
 const Login = () => {
-    const { signIn, logInWithGoogle } = useContext(AuthContext)
+    const { signInUser, logInWithGoogle } = useContext(AuthContext)
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -21,7 +21,7 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password)
-        signIn(email, password)
+        signInUser(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user)
