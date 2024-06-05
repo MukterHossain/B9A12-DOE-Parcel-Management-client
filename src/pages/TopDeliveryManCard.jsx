@@ -1,6 +1,6 @@
 
 
-const OurFeaturesCard = ({item}) => {
+const TopDeliveryManCard = ({item}) => {
     const {icon, title, description, totalBooked,totalDelivered,totalUse } = item;
     console.log(item)
     return (
@@ -19,4 +19,4 @@ const OurFeaturesCard = ({item}) => {
     );
 };
 
-export default OurFeaturesCard;
+export default TopDeliveryManCard;

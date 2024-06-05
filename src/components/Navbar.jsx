@@ -1,12 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from '../assets/logo.png'
-import { useContext, useState } from "react";
-import { AuthContext } from "../provider/AuthProvider";
 import avatarImg from '../assets/profile.jpg'
+import { MdNotificationsActive } from "react-icons/md";
+import useAuth from "../hooks/useAuth";
+import { useState } from "react";
 
 
 const Navbar = () => {
-    const { user, logOutUser } = useContext(AuthContext)
+    const { user, logOutUser } = useAuth()
     const [isOpen, setIsOpen] = useState(false)
 
 
@@ -79,22 +80,26 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar-end">
+                    <div>
+                        <Link to="/dashboard/adminHome">
+                            <MdNotificationsActive className="text-xl mr-4"></MdNotificationsActive>
+                        </Link>
+                    </div>
                     <div className='relative'>
                         <div className='flex flex-row items-center gap-3'>
                             <div
                                 onClick={() => setIsOpen(!isOpen)}
-                                className='p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition'
+                                className='p-1 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition'
                             >
-                                <div className='hidden md:block'>
+                                <div className=''>
                                     <img
                                         className='rounded-full'
                                         referrerPolicy='no-referrer'
                                         title={user?.displayName}
                                         src={user && user.photoURL ? user.photoURL : avatarImg}
-
                                         alt='profile'
-                                        height='30'
-                                        width='30'
+                                        height='40'
+                                        width='40'
                                     />
                                 </div>
                             </div>

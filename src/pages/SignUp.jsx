@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 const SignUp = () => {
@@ -11,6 +12,7 @@ const SignUp = () => {
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
     const { createUser, updateUserProfile } = useContext(AuthContext)
     const navigate = useNavigate()
+    const axiosSecure = useAxiosSecure()
 
 
     const onSubmit = data => {
@@ -30,30 +32,25 @@ const SignUp = () => {
                             showConfirmButton: false,
                             timer: 1500
                         });
-
-
-
-                        // const userInfo = {
-                        //     name: data.name,
-                        //     email: data.email
-                        // }
-                        // axiosPublic.post('/users', userInfo)
-                        //     .then(res => {
-                        //         if (res.data.insertedId) {
-                        //             console.log('user added to the database')
-                        //             reset()
-                        //             Swal.fire({
-                        //                 position: "top-end",
-                        //                 icon: "success",
-                        //                 title: "Sign up successfully",
-                        //                 showConfirmButton: false,
-                        //                 timer: 1500
-                        //             });
-                        //             navigate('/')
-                        //         }
-                        //     })
-                       
-                        navigate('/')
+                     const userInfo = {
+                            name: data.name,
+                            email: data.email
+                        }
+                        axiosSecure.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('user added to the database')
+                                    reset()
+                                    Swal.fire({
+                                        position: "top-end",
+                                        icon: "success",
+                                        title: "Sign up successfully",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    navigate('/')
+                                }
+                            })
 
                     })
                     .catch(err => console.log(err))
