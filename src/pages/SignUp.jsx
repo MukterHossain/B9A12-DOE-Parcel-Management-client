@@ -4,15 +4,18 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+// import useAxiosSecure from "../hooks/useAxiosSecure";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import SocialLogin from "../components/SocialLogin";
 
 
 const SignUp = () => {
-    // const axiosPublic = useAxiosPublic() 
+    const axiosPublic = useAxiosPublic()
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
     const { createUser, updateUserProfile } = useContext(AuthContext)
     const navigate = useNavigate()
-    const axiosSecure = useAxiosSecure()
+    // const axiosSecure = useAxiosSecure()
+    
 
 
     const onSubmit = data => {
@@ -24,19 +27,11 @@ const SignUp = () => {
                     .then(() => {
                         console.log('user profile info updated')
                         // create user entry in the database
-                        reset()
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "Sign up successfully",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                     const userInfo = {
+                        const userInfo = {
                             name: data.name,
                             email: data.email
                         }
-                        axiosSecure.post('/users', userInfo)
+                        axiosPublic.post('/users', userInfo)
                             .then(res => {
                                 if (res.data.insertedId) {
                                     console.log('user added to the database')
@@ -79,6 +74,17 @@ const SignUp = () => {
                                     <input type="text"  {...register("name", { required: true })} name="name" placeholder="Name" className="input input-bordered" />
                                     {errors.name && <span className="text-red-600">Name is required</span>}
                                 </div>
+                                <div className="form-control w-full my-6 ">
+                                    <label className="label">
+                                        <span className="label-text">Type*</span>
+                                    </label>
+                                    <select defaultValue="default" {...register('type', { required: true })} className="select select-bordered w-full">
+                                        <option disabled value="default">Select a Type</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="deliveryMen">Delivery Men</option>
+                                    </select>
+                                    {errors.type && <span className="text-red-600">Photo URL is required</span>}
+                                </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">phot URL</span>
@@ -114,6 +120,7 @@ const SignUp = () => {
                                 </div>
                             </form>
                             <p className="px-6"><small>Already have an account <Link to='/login' className="text-blue-600 font-bold">Please Login</Link></small></p>
+                            <SocialLogin></SocialLogin>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@
 
 const OurFeaturesCard = ({item}) => {
     const {icon, title, description, totalBooked,totalDelivered,totalUse } = item;
-    console.log(item)
+    // console.log(item)
     return (
         <div>
             <div className="card card-compact w-full bg-base-100 shadow-xl">

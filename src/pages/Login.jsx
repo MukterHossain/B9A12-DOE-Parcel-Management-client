@@ -2,10 +2,11 @@ import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
+import SocialLogin from "../components/SocialLogin";
 
 
 const Login = () => {
-    const { signInUser, logInWithGoogle } = useAuth()
+    const { signInUser } = useAuth()
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -43,38 +44,38 @@ const Login = () => {
                   navigate(from, {replace:true});
             })
     }
-    const handleGoogleLogin = () =>{
-        logInWithGoogle()
-        .then(result => {
-            const user = result.user;
-            console.log(user)
-            Swal.fire({
-                title: "User Login Successful",
-                showClass: {
-                  popup: `
-                    animate__animated
-                    animate__fadeInUp
-                    animate__faster
-                  `
-                },
-                hideClass: {
-                  popup: `
-                    animate__animated
-                    animate__fadeOutDown
-                    animate__faster
-                  `
-                }
-              });
-              navigate(from, {replace:true});
-        })
-        .catch(err=> {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: {err},
-              });
-        })
-    }
+    // const handleGoogleLogin = () =>{
+    //     logInWithGoogle()
+    //     .then(result => {
+    //         const user = result.user;
+    //         console.log(user)
+    //         Swal.fire({
+    //             title: "User Login Successful",
+    //             showClass: {
+    //               popup: `
+    //                 animate__animated
+    //                 animate__fadeInUp
+    //                 animate__faster
+    //               `
+    //             },
+    //             hideClass: {
+    //               popup: `
+    //                 animate__animated
+    //                 animate__fadeOutDown
+    //                 animate__faster
+    //               `
+    //             }
+    //           });
+    //           navigate(from, {replace:true});
+    //     })
+    //     .catch(err=> {
+    //         Swal.fire({
+    //             icon: "error",
+    //             title: "Oops...",
+    //             text: {err},
+    //           });
+    //     })
+    // }
 
 
 
@@ -111,8 +112,9 @@ const Login = () => {
                             </div>
                         </form>
                         <p className='px-6'><small>New Here? <Link to='/signup' className='text-blue-600 font-bold'>Create an account</Link></small></p>
-                        <p onClick={handleGoogleLogin} className="text-blue-500"> With Google </p>
-                        {/* <SocialLogin></SocialLogin> */}
+                        <SocialLogin></SocialLogin>
+                        {/* <p onClick={handleGoogleLogin} className="text-blue-500"> With Google </p> */}
+                        
                     </div>
                 </div>
             </div>

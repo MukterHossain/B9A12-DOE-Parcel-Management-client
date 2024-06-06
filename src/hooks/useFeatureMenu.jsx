@@ -13,7 +13,7 @@ const useFeatureMenu = () => {
             setLoading(false)
         })
     }, [])
-    console.log(features)
+    // console.log(features)
     return [features, loading]
 };
 
