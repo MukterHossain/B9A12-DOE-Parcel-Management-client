@@ -6,6 +6,10 @@ import TopDeliveryMan from "../pages/TopDeliveryMan";
 
 
 const Home = () => {
+    const result = 60;
+    const result1 = 50;
+
+
     return (
         <div className="">
             <div>
@@ -16,6 +20,9 @@ const Home = () => {
             <Banner></Banner>
             <OurFeatures></OurFeatures>
             <TopDeliveryMan></TopDeliveryMan>
+            <button className="btn btn-outline">
+                {result > '50' ? <li>Item 1</li> : result1 > '40' ? <li>Item 2</li> :  <li>Item 3</li> }
+            </button>
         </div>
     );
 };

@@ -11,6 +11,8 @@ import Dashboard from "../Dashboard/Dashboard";
 import AdminHome from "../Dashboard/AdminHome";
 import BookParcel from "../Dashboard/BookParcel";
 import UserHome from "../Dashboard/UserHome";
+import AllUsers from "../Dashboard/AllUsers";
+import AllParcels from "../Dashboard/AllParcels";
 
 export const router = createBrowserRouter([
   {
@@ -51,7 +53,18 @@ export const router = createBrowserRouter([
       {
         path:'userHome',
         element: <UserHome></UserHome>
+      },
+
+      // Admin Route
+      {
+        path: 'users',
+        element: <AllUsers></AllUsers>
+      },
+      {
+        path: 'allParcels',
+        element: <AllParcels></AllParcels>
       }
+
     ]
   }
 ]);
