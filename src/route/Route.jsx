@@ -13,6 +13,7 @@ import BookParcel from "../Dashboard/BookParcel";
 import UserHome from "../Dashboard/UserHome";
 import AllUsers from "../Dashboard/AllUsers";
 import AllParcels from "../Dashboard/AllParcels";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -42,10 +43,7 @@ export const router = createBrowserRouter([
     path:'dashboard',
     element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
-      {
-        path:'adminHome',
-        element:<AdminHome></AdminHome>
-      },
+     
       {
         path:'bookParcel',
         element: <BookParcel></BookParcel>
@@ -55,14 +53,19 @@ export const router = createBrowserRouter([
         element: <UserHome></UserHome>
       },
 
-      // Admin Route
+
+      // Admin Route     
+      {
+        path:'adminHome',
+        element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
+      },
       {
         path: 'users',
-        element: <AllUsers></AllUsers>
+        element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
       },
       {
         path: 'allParcels',
-        element: <AllParcels></AllParcels>
+        element: <AdminRoute><AllParcels></AllParcels></AdminRoute>
       }
 
     ]

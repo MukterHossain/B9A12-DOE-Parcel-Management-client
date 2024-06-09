@@ -44,38 +44,6 @@ const Login = () => {
                   navigate(from, {replace:true});
             })
     }
-    // const handleGoogleLogin = () =>{
-    //     logInWithGoogle()
-    //     .then(result => {
-    //         const user = result.user;
-    //         console.log(user)
-    //         Swal.fire({
-    //             title: "User Login Successful",
-    //             showClass: {
-    //               popup: `
-    //                 animate__animated
-    //                 animate__fadeInUp
-    //                 animate__faster
-    //               `
-    //             },
-    //             hideClass: {
-    //               popup: `
-    //                 animate__animated
-    //                 animate__fadeOutDown
-    //                 animate__faster
-    //               `
-    //             }
-    //           });
-    //           navigate(from, {replace:true});
-    //     })
-    //     .catch(err=> {
-    //         Swal.fire({
-    //             icon: "error",
-    //             title: "Oops...",
-    //             text: {err},
-    //           });
-    //     })
-    // }
 
 
 
