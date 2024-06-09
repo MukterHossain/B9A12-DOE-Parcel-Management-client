@@ -3,6 +3,7 @@ import SectionTitle from "../Shared/SectionTitle";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useQuery } from '@tanstack/react-query'
 import {  FaUsers } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 
 const AllUsers = () => {
@@ -50,6 +51,9 @@ const AllUsers = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>DOE Courier || All Users</title>
+            </Helmet>
             <SectionTitle heading={"All Users"}></SectionTitle>
             <div>
                 <div className="overflow-x-auto">
@@ -72,7 +76,7 @@ const AllUsers = () => {
                                 users.map((user, index) => <tr key={user._id}>
                                     <td>{index + 1} </td>
                                     <td>{user.name}</td>
-                                    <td>01245336</td>
+                                    <td>{user?.phone} phone</td>
                                     <td>120</td>
                                     <td>1240</td>
                                     <td>

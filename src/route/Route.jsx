@@ -6,7 +6,6 @@ import ErrorPage from "../pages/ErrorPage";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import PrivateRoute from "./PrivateRoute";
-import Demo from "../pages/Demo";
 import Dashboard from "../Dashboard/Dashboard";
 import AdminHome from "../Dashboard/AdminHome";
 import BookParcel from "../Dashboard/BookParcel";
@@ -14,6 +13,14 @@ import UserHome from "../Dashboard/UserHome";
 import AllUsers from "../Dashboard/AllUsers";
 import AllParcels from "../Dashboard/AllParcels";
 import AdminRoute from "./AdminRoute";
+import Contact from "../pages/Contact";
+import DeliveryHome from "../Dashboard/DeliveryHome";
+import DeliveryList from "../Dashboard/DeliveryList";
+import Reviews from "../Dashboard/Reviews";
+import MyParcel from "../Dashboard/MyParcel";
+import MyProfile from "../Dashboard/MyProfile";
+import AllDeliveryMen from "../Dashboard/AllDeliveryMen";
+import Statistics from "../Dashboard/Statistics";
 
 export const router = createBrowserRouter([
   {
@@ -34,23 +41,30 @@ export const router = createBrowserRouter([
           element: <SignUp></SignUp>
         },
         {
-          path: 'demo',
-          element:<PrivateRoute><Demo></Demo></PrivateRoute>
+          path: 'contact',
+          element:<Contact></Contact>
         }
     ]
   },
   {
     path:'dashboard',
     element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-    children: [
-     
+    children: [     
+      {
+        path:'userHome',
+        element: <UserHome></UserHome>
+      },
       {
         path:'bookParcel',
         element: <BookParcel></BookParcel>
       },
       {
-        path:'userHome',
-        element: <UserHome></UserHome>
+        path:'myParcel',
+        element: <MyParcel></MyParcel>
+      },
+      {
+        path:'profile',
+        element: <MyProfile></MyProfile>
       },
 
 
@@ -66,6 +80,28 @@ export const router = createBrowserRouter([
       {
         path: 'allParcels',
         element: <AdminRoute><AllParcels></AllParcels></AdminRoute>
+      },
+      {
+        path: 'deliveryMen',
+        element: <AdminRoute><AllDeliveryMen></AllDeliveryMen></AdminRoute>
+      },
+      {
+        path: 'statistics',
+        element: <AdminRoute><Statistics></Statistics></AdminRoute>
+      },
+
+      // delivery Route     
+      {
+        path:'deliveryHome',
+        element: <DeliveryHome></DeliveryHome>
+      },
+      {
+        path: 'deliveryList',
+        element: <DeliveryList></DeliveryList>
+      },
+      {
+        path: 'reviews',
+        element: <Reviews></Reviews>
       }
 
     ]

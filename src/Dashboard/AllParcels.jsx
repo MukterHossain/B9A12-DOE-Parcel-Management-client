@@ -1,9 +1,13 @@
+import { Helmet } from "react-helmet-async";
 import SectionTitle from "../Shared/SectionTitle";
 
 
 const AllParcels = () => {
     return (
         <div>
+            <Helmet>
+                <title>DOE Courier || All Parcels</title>
+            </Helmet>
             <SectionTitle heading={"Booked parcels"}></SectionTitle>
             <div>
                 <div className="overflow-x-auto">

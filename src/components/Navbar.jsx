@@ -1,5 +1,4 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from '../assets/logo.png'
 import avatarImg from '../assets/profile.jpg'
 import { MdNotificationsActive } from "react-icons/md";
 import useAuth from "../hooks/useAuth";
@@ -21,27 +20,9 @@ const Navbar = () => {
     const navOption = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
-        <li><NavLink to='/demo'>Demo</NavLink></li>
-        {/* <li><NavLink to='/order/salad'>Order Food</NavLink></li> */}
+        <li><NavLink to='/contact'>Contact Us</NavLink></li>
     </>
-    {
-        // ternary operator
-
-        // user ? 'true' : 'false'
-        // user ? condition ? 'double true' : 'one true' : 'false'
-    }
-    {/* {
-    user && isAdmin &&  <li><NavLink to='/dashboard/adminHome'>Dashboard</NavLink></li>
-}
-{
-    user && !isAdmin &&  <li><NavLink to='/dashboard/userHome'>Dashboard</NavLink></li>
-} */}
-    {/* <li><NavLink to='/dashboard/cart'>
-    <button className="btn">
-        <FaShoppingCart className="mr-2"></FaShoppingCart>
-        <div className="badge badge-secondary">+{cart.length}</div>
-    </button>
-</NavLink></li> */}
+   
 
 
 
@@ -62,7 +43,7 @@ const Navbar = () => {
                         <Link to='/'>
                             <div className="flex items-center">
                                 <img
-                                    src={logo}
+                                    src={"https://i.ibb.co/pJtsy6q/logo.png"}
                                     alt='logo'
                                     width='70'
                                     height='70'

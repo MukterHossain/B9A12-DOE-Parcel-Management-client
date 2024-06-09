@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.png'
+// import logo from '../assets/logo.png'
 
 const Footer = () => {
     return (
@@ -7,7 +7,7 @@ const Footer = () => {
             <div className="footer p-10 bg-neutral text-neutral-content">
                 <aside>
                     <Link to='/'>
-                        <img className='w-20' src={logo} alt="logo" />
+                        <img className='w-20' src={'https://i.ibb.co/pJtsy6q/logo.png'} alt="logo" />
                     </Link>
                     <p>DOE Courier service.<br />Providing reliable and trustworthy service since 1992</p>
                 </aside>

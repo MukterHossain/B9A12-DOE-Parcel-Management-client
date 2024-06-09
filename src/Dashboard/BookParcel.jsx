@@ -3,6 +3,7 @@ import SectionTitle from "../Shared/SectionTitle";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 
 
 const BookParcel = () => {
@@ -46,6 +47,9 @@ const BookParcel = () => {
 
     return (
         <div>
+             <Helmet>
+                <title>DOE Courier || Book Parcel</title>
+            </Helmet>
             <SectionTitle heading="Book a Parcel" ></SectionTitle>
             <div>
                 <form onSubmit={handleSubmit(onSubmit)}>

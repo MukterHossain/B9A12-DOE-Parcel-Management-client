@@ -10,7 +10,7 @@ const TopDeliveryMan = () => {
             <SectionTitle heading={"Top Delivery Man"} subHeading={"Traditional couriers have a fleet of vehicles like motorcycle, car, van, and truck to transport goods from one location to another"}></SectionTitle>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 justify-center gap-4">
                 {
-                features?.map(item => <TopDeliveryManCard key={item.id} item={item}></TopDeliveryManCard>)
+                features?.map(item => <TopDeliveryManCard key={item._id} item={item}></TopDeliveryManCard>)
                 }               
             </div>
         </div>

@@ -1,15 +1,15 @@
 import { Helmet } from "react-helmet-async";
 
 
-const UserHome = () => {
+const Reviews = () => {
     return (
         <div>
             <Helmet>
-                <title>DOE Courier || User Home</title>
+                <title>DOE Courier || Reviews</title>
             </Helmet>
-            <h2>User Home</h2>
+            <h1>Reviews</h1>
         </div>
     );
 };
 
-export default UserHome;
+export default Reviews;

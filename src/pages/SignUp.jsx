@@ -29,7 +29,9 @@ const SignUp = () => {
                         // create user entry in the database
                         const userInfo = {
                             name: data.name,
-                            email: data.email
+                            email: data.email,
+                            role: data.type,
+                            image: data.photoURL
                         }
                         axiosPublic.post('/users', userInfo)
                             .then(res => {
@@ -87,7 +89,7 @@ const SignUp = () => {
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">phot URL</span>
+                                        <span className="label-text">photo URL</span>
                                     </label>
                                     <input type="text"  {...register("photoURL", { required: true })} placeholder="Photo URL" className="input input-bordered" />
                                     {errors.photoURL && <span className="text-red-600">Photo URL is required</span>}

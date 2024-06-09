@@ -1,11 +1,17 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaSearch, FaUsers, FaUtensils } from "react-icons/fa";
+import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaUsers, FaUtensils } from "react-icons/fa";
 import useAdmin from "../hooks/useAdmin";
+import useDeliverMen from "../hooks/useDeliverMen";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
+    const isDeliveryMen = useDeliverMen();
     return (
         <div className="flex">
+            <Helmet>
+                <title>DOE Courier || Dashboard</title>
+            </Helmet>
             {/* dashboard side bar */}
             <div className="w-60 min-h-screen bg-orange-400">
                 <ul className="menu">
@@ -38,7 +44,26 @@ const Dashboard = () => {
                                     Statistics</NavLink>
                             </li>
                         </>
-                            :
+                            : 
+                            isDeliveryMen ? <>
+                                <li>
+                                    <NavLink to="/dashboard/deliveryHome">
+                                        <FaHome></FaHome>
+                                        Delivery Men Home</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/deliveryList">
+                                        <FaList></FaList>
+                                        My Delivery List</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/reviews">
+                                        <FaCalendar></FaCalendar>
+                                        My Reviews</NavLink>
+                                </li>
+                                
+                            </>
+                            : 
                             <>
                                 <li>
                                     <NavLink to="/dashboard/userHome">
@@ -70,12 +95,7 @@ const Dashboard = () => {
                             Home</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/order/salad">
-                            <FaSearch></FaSearch>
-                            Menu</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/order/contact">
+                        <NavLink to="/contact">
                             <FaEnvelope></FaEnvelope>
                             Contact</NavLink>
                     </li>
