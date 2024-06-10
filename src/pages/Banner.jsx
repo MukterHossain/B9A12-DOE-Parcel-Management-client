@@ -8,7 +8,7 @@ const Banner = () => {
                 <div className=" ">
                     <div className="text-center">
                         <div className="text-white w-4/5 md:w-2/3   m-auto text-center ">
-                            <h1 className="mb-5 text-5xl font-bold">Welcome to DOE</h1>
+                            <h1 className="mb-5 text-5xl text-green-200 font-bold">Welcome to DOE</h1>
                             <p className="mb-5 text-center">The courier service industry uses platforms to manage their fleets, clients, and business operations. Some of these substrates are old and are no longer as effective as newer technologies, posing competition issues.</p>
                         </div>
                         <div className="">

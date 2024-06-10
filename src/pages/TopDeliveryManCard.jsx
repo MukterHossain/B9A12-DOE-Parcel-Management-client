@@ -1,18 +1,19 @@
 
 
 const TopDeliveryManCard = ({item}) => {
-    const {icon, title, description, totalBooked,totalDelivered,totalUse } = item;
+    // const {icon, title, description, totalBooked,totalDelivered,totalUse } = item;
+    const {name, image, email } = item;
     // console.log(item)
     return (
         <div>
             <div className="card card-compact w-full bg-base-100 shadow-xl">
-                <img className="w-[80px] h-[70px]" src={icon} alt="" />
+                <img className="w-[80px] h-[70px]" src={image} alt="" />
                 <div className="card-body">
-                    <h2 className="card-title uppercase text-blue-600 font-bold">{title}</h2>
-                    <p>{description}</p>
-                    <p>Total Booked: {totalBooked}</p>
+                    <h2 className="card-title uppercase text-blue-600 font-bold">{name}</h2>
+                    <p>{email}</p>
+                    {/* <p>Total Booked: {totalBooked}</p>
                     <p>Total Delivered: {totalDelivered}</p>
-                    <p>Total User: {totalUse}</p>
+                    <p>Total User: {totalUse}</p> */}
                 </div>
             </div>
         </div>

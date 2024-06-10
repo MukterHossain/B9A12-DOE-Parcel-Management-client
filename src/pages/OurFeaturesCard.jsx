@@ -1,7 +1,7 @@
 
 
-const OurFeaturesCard = ({item}) => {
-    const {icon, title, description, totalBooked,totalDelivered,totalUse } = item;
+const OurFeaturesCard = ({ item }) => {
+    const { icon, title, description, totalBooked, totalDelivered, totalUser } = item;
     // console.log(item)
     return (
         <div>
@@ -10,9 +10,12 @@ const OurFeaturesCard = ({item}) => {
                 <div className="card-body">
                     <h2 className="card-title uppercase text-blue-600 font-bold">{title}</h2>
                     <p>{description}</p>
-                    <p>Total Booked: {totalBooked}</p>
-                    <p>Total Delivered: {totalDelivered}</p>
-                    <p>Total User: {totalUse}</p>
+                    <hr />
+                    <div className="space-y-2">
+                        <p>Total Booked: <span className="text-blue-600 font-bold">{totalBooked}</span></p>
+                        <p>Total Delivered: <span className="text-blue-600 font-bold">{totalDelivered}</span></p>
+                        <p>Total User: <span className="text-blue-600 font-bold">{totalUser}</span></p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,8 +1,12 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaUsers, FaUtensils } from "react-icons/fa";
+import { FaAd, FaCalendar, FaEnvelope, FaHome, FaList, FaUsers } from "react-icons/fa";
 import useAdmin from "../hooks/useAdmin";
 import useDeliverMen from "../hooks/useDeliverMen";
 import { Helmet } from "react-helmet-async";
+import { MdReviews } from "react-icons/md";
+import { AiFillProduct } from "react-icons/ai";
+import { FcStatistics } from "react-icons/fc";
+import { GrUserWorker } from "react-icons/gr";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
@@ -25,7 +29,7 @@ const Dashboard = () => {
                             </li>
                             <li>
                                 <NavLink to="/dashboard/allParcels">
-                                    <FaUtensils></FaUtensils>
+                                    <AiFillProduct></AiFillProduct>
                                     All Parcels</NavLink>
                             </li>
                             <li>
@@ -35,12 +39,12 @@ const Dashboard = () => {
                             </li>
                             <li>
                                 <NavLink to="/dashboard/deliveryMen">
-                                    <FaBook></FaBook>
+                                    <GrUserWorker></GrUserWorker>
                                     All Delivery Men</NavLink>
                             </li>
                             <li>
                                 <NavLink to="/dashboard/statistics">
-                                    <FaList></FaList>
+                                    <FcStatistics></FcStatistics>
                                     Statistics</NavLink>
                             </li>
                         </>
@@ -58,7 +62,7 @@ const Dashboard = () => {
                                 </li>
                                 <li>
                                     <NavLink to="/dashboard/reviews">
-                                        <FaCalendar></FaCalendar>
+                                        <MdReviews></MdReviews>
                                         My Reviews</NavLink>
                                 </li>
                                 
