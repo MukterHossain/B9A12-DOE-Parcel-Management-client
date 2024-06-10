@@ -1,8 +1,23 @@
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../Shared/SectionTitle";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+// import useAxiosPublic from "../hooks/useAxiosPublic";
 
 
 const MyParcel = () => {
+    const axiosSecure = useAxiosSecure();
+    // const axiosPublic = useAxiosPublic();
+
+    const { data: bookings = [], refetch } = useQuery({
+        queryKey: ['bookings'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/bookings')
+            return res.data;
+        }
+    })
+    console.log(bookings)
+    
     return (
         <div>
             <Helmet>
@@ -17,9 +32,9 @@ const MyParcel = () => {
                         <tr>
                             <th>No</th>
                             <th>Parcel Type</th>
-                            <th>Requested Delivery Date</th>
-                            <th>Approximate Delivery Date</th>
-                            <th>Delivery Men ID</th>
+                            <th>Req. Date</th>
+                            <th>Ap. Date</th>
+                            <th>Deli, Men ID</th>
                             <th>Booking Status</th>
                             <th>Update</th>
                             <th>Cancel</th>
@@ -28,15 +43,13 @@ const MyParcel = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* row 1 */}
-                        <tr>
-                            <td>1 </td>
-                            <td>Akas </td>
-                            <td>01245336</td>
-                            <td>12/04/2024</td>
-                            <td> new Date()</td>
-                            <td>1240</td>
-                            <td>pending</td>
+                    {bookings.map((item, index) => <tr key={item._id}>
+                        
+                            <td>{index + 1} </td>
+                            <td>{item.parcelType} </td>
+                            <td>{item.requestedDate}</td>
+                            <td>{item.requestedDate}</td>
+                            <td>{item._id}</td>
                             <td>
                                 <button className="btn btn-sm">
                                     updated
@@ -57,7 +70,8 @@ const MyParcel = () => {
                                     pay
                                 </button>
                             </td>
-                        </tr>
+                        </tr> )}
+                        
                     </tbody>
 
                 </table>

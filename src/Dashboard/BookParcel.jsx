@@ -47,22 +47,22 @@ const BookParcel = () => {
 
     return (
         <div>
-             <Helmet>
+            <Helmet>
                 <title>DOE Courier || Book Parcel</title>
             </Helmet>
             <SectionTitle heading="Book a Parcel" ></SectionTitle>
             <div>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="flex gap-6">
+                    <div className="grid lg:grid-cols-2 gap-x-6 gap-y-4">
                         {/* Name */}
-                        <div className="form-control w-full my-6">
+                        <div className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Name</span>
                             </div>
                             <input type="text" defaultValue={user?.displayName}
                                 {...register("price", { required: true })} className="input input-bordered w-full " />
                         </div>
-                        <div className="form-control w-full my-6">
+                        <div className="form-control w-full ">
                             <div className="label">
                                 <span className="label-text">Email</span>
                             </div>
@@ -71,116 +71,118 @@ const BookParcel = () => {
                         </div>
                     </div>
 
-                    <div className="flex gap-6">
+                    <div className="grid lg:grid-cols-2 gap-x-6 gap-y-4 mt-3">
                         {/* Phone */}
-                        <div className="form-control w-full my-6">
+                        <div className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Phone Number*</span>
                             </div>
                             <input type="number"{...register("phone", { required: true })}
                                 placeholder="Phone" className="input input-bordered w-full " />
-                            {errors.phone && <span className="text-red-600">Name is required</span>}
+                            {errors.phone && <span className="text-red-600">Phone Number is required</span>}
                         </div>
 
                         {/* Parcel Type */}
-                        <div className="form-control w-full my-6">
+                        <div className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Parcel Type*</span>
                             </div>
                             <input type="text" {...register("parcelType", { required: true })}
                                 placeholder="parcel Type" className="input input-bordered w-full " />
-                            {errors.parcelType && <span className="text-red-600">Name is required</span>}
+                            {errors.parcelType && <span className="text-red-600">Parcel Type is required</span>}
                         </div>
                     </div>
 
-                    <div className="flex gap-6">
+                    <div className="grid lg:grid-cols-2 gap-x-6 gap-y-4 mt-3">
                         {/* Parcel Weight */}
-                        <div className="form-control w-full my-6">
+                        <div className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Parcel Weight*</span>
                             </div>
                             <input type="number"{...register("parcelWeight", { required: true })} placeholder="Parcel Weight" className="input input-bordered w-full " />
-                            {errors.parcelWeight && <span className="text-red-600">Name is required</span>}
+                            {errors.parcelWeight && <span className="text-red-600">Parcel Weight is required</span>}
                         </div>
 
                         {/* Receiver’s Name */}
-                        <div className="form-control w-full my-6">
+                        <div className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Receivers Name*</span>
                             </div>
                             <input type="text"{...register("receiverName", { required: true })}
                                 placeholder="Receivers Name" className="input input-bordered w-full " />
-                            {errors.receiverName && <span className="text-red-600">Name is required</span>}
+                            {errors.receiverName && <span className="text-red-600">Receivers Name is required</span>}
                         </div>
                     </div>
-                    <div className="flex gap-6">
+                    <div className="grid lg:grid-cols-2 gap-x-6 gap-y-4 mt-3">
                         {/* Receiver's Phone Number */}
-                        <div className="form-control w-full my-6">
+                        <div className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Receiver Phone Number*</span>
                             </div>
                             <input type="number"{...register("receiverPhone", { required: true })}
                                 placeholder="Receiver Phone Number" className="input input-bordered w-full " />
-                            {errors.receiverPhone && <span className="text-red-600">Name is required</span>}
+                            {errors.receiverPhone && <span className="text-red-600">Receiver Phone is required</span>}
                         </div>
 
                         {/* Parcel Delivery Address */}
-                        <div className="form-control w-full my-6">
+                        <div className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Parcel Delivery Address*</span>
                             </div>
                             <input type="text"{...register("deliveryAddress", { required: true })}
 
                                 placeholder="Parcel Delivery Address" className="input input-bordered w-full " />
-                            {errors.deliveryAddress && <span className="text-red-600">Name is required</span>}
+                            {errors.deliveryAddress && <span className="text-red-600">Parcel Delivery Address is required</span>}
                         </div>
                     </div>
-                    <div className="flex gap-6">
+                    <div className="grid lg:grid-cols-2 gap-x-6 gap-y-4 mt-3">
                         {/*  Requested Delivery Date */}
-                        <div className="form-control w-full my-6">
+                        <div className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Requested Delivery Date*</span>
                             </div>
                             <input type="date"{...register("requestedDate", { required: true })}
                                 placeholder="Requested Delivery Date" className="input input-bordered w-full " />
-                            {errors.requestedDate && <span className="text-red-600">Name is required</span>}
+                            {errors.requestedDate && <span className="text-red-600">Requested Delivery Date is required</span>}
                         </div>
 
                         {/* Delivery Address Latitude */}
-                        <div className="form-control w-full my-6">
+                        <div className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Delivery Address Latitude*</span>
                             </div>
                             <input type="number" {...register("latitude", { required: true })}
                                 placeholder="Delivery Address Latitude" className="input input-bordered w-full " />
-                            {errors.latitude && <span className="text-red-600">Name is required</span>}
+                            {errors.latitude && <span className="text-red-600">Delivery Address Latitude is required</span>}
                         </div>
                     </div>
-                    <div className="flex gap-6">
+                    <div className="grid lg:grid-cols-2 gap-x-6 gap-y-4 mt-3">
                         {/* Delivery Address longitude */}
-                        <div className="form-control w-full my-6">
+                        <div className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Delivery Address longitude*</span>
                             </div>
                             <input type="number" {...register("longitude", { required: true })}
                                 placeholder="Delivery Address longitude" className="input input-bordered w-full " />
-                            {errors.longitude && <span className="text-red-600">Name is required</span>}
+                            {errors.longitude && <span className="text-red-600">Delivery Address longitude is required</span>}
                         </div>
 
                         {/* price */}
-                        <div className="form-control w-full my-6">
+                        <div className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Price*</span>
                             </div>
                             <input type="number"{...register("price", { required: true })}
                                 placeholder="price" className="input input-bordered w-full " />
-                            {errors.price && <span className="text-red-600">Name is required</span>}
+                            {errors.price && <span className="text-red-600">Price is required</span>}
                         </div>
                     </div>
 
-                    <button className="btn bg-green-400">
-                        Book Now
-                    </button>
+                    <div className="w-2/5 md:w-3/12 mx-auto mt-6">
+                        <button className="btn bg-green-400">
+                            Book Now 
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

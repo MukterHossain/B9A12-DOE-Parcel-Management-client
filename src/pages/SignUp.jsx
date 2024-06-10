@@ -80,8 +80,8 @@ const SignUp = () => {
                                     <label className="label">
                                         <span className="label-text">Type*</span>
                                     </label>
-                                    <select defaultValue="default" {...register('type', { required: true })} className="select select-bordered w-full">
-                                        <option disabled value="default">Select a Type</option>
+                                    <select defaultValue="user" {...register('type', { required: true })} className="select select-bordered w-full">
+                                        <option disabled value="user">Select a Type</option>
                                         <option value="admin">Admin</option>
                                         <option value="deliveryMen">Delivery Men</option>
                                     </select>

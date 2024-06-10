@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FaAd, FaCalendar, FaEnvelope, FaHome, FaList, FaUsers } from "react-icons/fa";
 import useAdmin from "../hooks/useAdmin";
-import useDeliverMen from "../hooks/useDeliverMen";
+// import useDeliverMen from "../hooks/useDeliverMen";
 import { Helmet } from "react-helmet-async";
 import { MdReviews } from "react-icons/md";
 import { AiFillProduct } from "react-icons/ai";
@@ -10,7 +10,8 @@ import { GrUserWorker } from "react-icons/gr";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
-    const isDeliveryMen = useDeliverMen();
+    // const isDeliveryMen = useDeliverMen();
+    const isDeliveryMen = false;
     return (
         <div className="flex">
             <Helmet>

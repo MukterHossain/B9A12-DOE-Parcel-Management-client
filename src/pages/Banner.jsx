@@ -14,7 +14,7 @@ const Banner = () => {
                         <div className="">
                             <div className="  w-1/2 m-auto flex  ">
                                 <div className=" w-2/3 bg-white rounded-l-xl">
-                                    <input type="text" placeholder="Type here" className="text-lg rounded-l-xl  outline-none px-3 py-2" />
+                                    <input type="text" placeholder="Type here" className="text-lg bg-white rounded-l-xl  outline-none px-3 py-2" />
                                 </div>
                                 <div className="border-l-2 w-1/3 rounded-r-xl bg-green-500">
                                     <span className="text-center rounded-r-xl  px-3 py-2 text-xl ml-4">Search</span>
