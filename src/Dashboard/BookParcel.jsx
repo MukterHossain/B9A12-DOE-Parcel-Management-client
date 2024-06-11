@@ -13,7 +13,7 @@ const BookParcel = () => {
 
 
     const onSubmit = async (data) => {
-        console.log(data)
+        // console.log(data)
         const userInfo = {
             name: data.name,
             email: data.email,
@@ -31,7 +31,7 @@ const BookParcel = () => {
         const bookingsParcel = await axiosPublic.post('/bookings', userInfo)
         console.log(bookingsParcel.data)
         if (bookingsParcel.data.insertedId) {
-            console.log('bookings added to the database')
+            // console.log('bookings added to the database')
             reset()
             Swal.fire({
                 position: "top-end",

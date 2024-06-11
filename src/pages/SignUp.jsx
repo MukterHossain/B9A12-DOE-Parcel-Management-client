@@ -22,7 +22,7 @@ const SignUp = () => {
         createUser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
-                console.log(loggedUser)
+                // console.log(loggedUser)
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
                         console.log('user profile info updated')
@@ -36,7 +36,7 @@ const SignUp = () => {
                         axiosPublic.post('/users', userInfo)
                             .then(res => {
                                 if (res.data.insertedId) {
-                                    console.log('user added to the database')
+                                    // console.log('user added to the database')
                                     reset()
                                     Swal.fire({
                                         position: "top-end",
@@ -80,8 +80,8 @@ const SignUp = () => {
                                     <label className="label">
                                         <span className="label-text">Type*</span>
                                     </label>
-                                    <select defaultValue="user" {...register('type', { required: true })} className="select select-bordered w-full">
-                                        <option disabled value="user">Select a Type</option>
+                                    <select defaultValue=" " {...register('type', { required: true })} className="select select-bordered w-full">
+                                        <option disabled value=" ">Select a Type</option>
                                         <option value="admin">Admin</option>
                                         <option value="deliveryMen">Delivery Men</option>
                                     </select>

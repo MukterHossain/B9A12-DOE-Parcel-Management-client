@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FaAd, FaCalendar, FaEnvelope, FaHome, FaList, FaUsers } from "react-icons/fa";
 import useAdmin from "../hooks/useAdmin";
-// import useDeliverMen from "../hooks/useDeliverMen";
+import useDeliverMen from "../hooks/useDeliverMen";
 import { Helmet } from "react-helmet-async";
 import { MdReviews } from "react-icons/md";
 import { AiFillProduct } from "react-icons/ai";
@@ -10,15 +10,14 @@ import { GrUserWorker } from "react-icons/gr";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
-    // const isDeliveryMen = useDeliverMen();
-    const isDeliveryMen = false;
+    const isDeliveryMen = useDeliverMen();
     return (
         <div className="flex">
             <Helmet>
                 <title>DOE Courier || Dashboard</title>
             </Helmet>
             {/* dashboard side bar */}
-            <div className="w-60 min-h-screen bg-orange-400">
+            <div className="w-60 min-h-screen bg-sky-400">
                 <div>
                     <div className="flex items-center bg-orange-200 p-2 rounded-xl mt-3 mx-3">
                         <img

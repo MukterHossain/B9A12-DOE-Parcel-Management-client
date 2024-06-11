@@ -1,12 +1,10 @@
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../Shared/SectionTitle";
-// import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
 
 const MyParcel = () => {
-    // const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
 
     const { data: bookings = [] } = useQuery({
@@ -16,7 +14,7 @@ const MyParcel = () => {
             return res.data;
         }
     })
-    console.log(bookings)
+    // console.log(bookings)
 
 
 

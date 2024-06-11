@@ -6,7 +6,7 @@ const useFeatureMenu = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch('http://localhost:5000/features')
+        fetch('https://y-red-five.vercel.app/features')
         .then(res => res.json())
         .then(data => {
             setFeatures(data)

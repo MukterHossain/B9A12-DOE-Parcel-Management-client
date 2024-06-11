@@ -1,35 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../Shared/SectionTitle";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-// import useFeatureMenu from "../hooks/useFeatureMenu";
+
 import TopDeliveryManCard from "./TopDeliveryManCard";
-// import { useState } from "react";
-// import useAuth from '../hooks/useAuth';
+
 
 
 const TopDeliveryMan = () => {
-    // const [features] = useFeatureMenu()
-    // const {user, loading} = useAuth();
-    // const [data, setData] = useState()
+
     const axiosSecure = useAxiosSecure();
 
 
-    const { data: users = [], refetch } = useQuery({
+    const { data: users = [] } = useQuery({
         queryKey: ['bookings'],
         queryFn: async () => {
             const res = await axiosSecure.get('/bookings')
             return res.data;
         }
     })
-    
 
-    const { data: bookings = [] } = useQuery({
-        queryKey: ['bookings'],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/bookings`)
-            return res.data;
-        }
-    })
    
 
    

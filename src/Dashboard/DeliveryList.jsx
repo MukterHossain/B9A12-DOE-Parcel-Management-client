@@ -22,7 +22,7 @@ const DeliveryList = () => {
                                 <th>User Phone</th>
                                 <th>Re. Date</th>
                                 <th>Appr. Date</th>
-                                <th>Reci. phone number</th>
+                                <th>Re. phone nu.</th>
                                 <th>Reci Address</th>
                                 <th>Location</th>
                             </tr>
