@@ -1,22 +1,25 @@
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../Shared/SectionTitle";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+// import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-// import useAxiosPublic from "../hooks/useAxiosPublic";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 
 const MyParcel = () => {
-    const axiosSecure = useAxiosSecure();
-    // const axiosPublic = useAxiosPublic();
+    // const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
 
-    const { data: bookings = [], refetch } = useQuery({
+    const { data: bookings = [] } = useQuery({
         queryKey: ['bookings'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/bookings')
+            const res = await axiosPublic.get('/bookings')
             return res.data;
         }
     })
     console.log(bookings)
+
+
+
     
     return (
         <div>
@@ -49,7 +52,8 @@ const MyParcel = () => {
                             <td>{item.parcelType} </td>
                             <td>{item.requestedDate}</td>
                             <td>{item.requestedDate}</td>
-                            <td>{item._id}</td>
+                            <td className="w-full">{item._id}</td>
+                            <td >Pending</td>
                             <td>
                                 <button className="btn btn-sm">
                                     updated

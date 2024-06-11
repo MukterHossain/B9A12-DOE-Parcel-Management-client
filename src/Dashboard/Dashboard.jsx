@@ -19,6 +19,17 @@ const Dashboard = () => {
             </Helmet>
             {/* dashboard side bar */}
             <div className="w-60 min-h-screen bg-orange-400">
+                <div>
+                    <div className="flex items-center bg-orange-200 p-2 rounded-xl mt-3 mx-3">
+                        <img
+                            src={"https://i.ibb.co/pJtsy6q/logo.png"}
+                            alt='logo'
+                            width='70'
+                            height='70'
+                        />
+                        <h2><span className="text-3xl font-bold text-blue-700">DOE</span> <span className="text-sm text-green-700 font-bold">Courier</span></h2>
+                    </div>
+                </div>
                 <ul className="menu">
 
                     {
@@ -49,7 +60,7 @@ const Dashboard = () => {
                                     Statistics</NavLink>
                             </li>
                         </>
-                            : 
+                            :
                             isDeliveryMen ? <>
                                 <li>
                                     <NavLink to="/dashboard/deliveryHome">
@@ -66,31 +77,31 @@ const Dashboard = () => {
                                         <MdReviews></MdReviews>
                                         My Reviews</NavLink>
                                 </li>
-                                
+
                             </>
-                            : 
-                            <>
-                                <li>
-                                    <NavLink to="/dashboard/userHome">
-                                        <FaHome></FaHome>
-                                        User Home</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/dashboard/bookParcel">
-                                        <FaCalendar></FaCalendar>
-                                        Book a Parcel</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/dashboard/myParcel">
-                                        <FaAd></FaAd>
-                                        My Parcels</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/dashboard/profile">
-                                        <FaList></FaList>
-                                        My Profile</NavLink>
-                                </li>
-                            </>
+                                :
+                                <>
+                                    <li>
+                                        <NavLink to="/dashboard/userHome">
+                                            <FaHome></FaHome>
+                                            User Home</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/bookParcel">
+                                            <FaCalendar></FaCalendar>
+                                            Book a Parcel</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/myParcel">
+                                            <FaAd></FaAd>
+                                            My Parcels</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/profile">
+                                            <FaList></FaList>
+                                            My Profile</NavLink>
+                                    </li>
+                                </>
                     }
                     <div className="divider"></div>
 
