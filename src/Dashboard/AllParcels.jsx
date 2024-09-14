@@ -1,8 +1,31 @@
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../Shared/SectionTitle";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import ManageModal from "../Modals/ManageModal";
 
 
 const AllParcels = () => {
+    const axiosSecure = useAxiosSecure();
+    let [isOpen, setIsOpen] = useState(false)
+
+    const { data: parcelItem = [], isLoading, refetch } = useQuery({
+        queryKey: ['parcel-allData'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/parcel-allData')
+            return res.data;
+        }
+    })
+    console.log(parcelItem)
+    function open() {
+        setIsOpen(true)
+    }
+
+    function close() {
+        setIsOpen(false)
+    }
+
     return (
         <div>
             <Helmet>
@@ -10,16 +33,16 @@ const AllParcels = () => {
             </Helmet>
             <SectionTitle heading={"Booked parcels"}></SectionTitle>
             <div>
+                <h1> parcelItem {parcelItem.length}</h1>
                 <div className="overflow-x-auto">
                     <table className="table">
                         {/* head */}
                         <thead>
                             <tr>
-                                <th>No</th>
                                 <th>Name</th>
                                 <th>Phone</th>
                                 <th>Booking Date</th>
-                                <th>Requested Delivery Date</th>
+                                <th>Re. Delivery Date</th>
                                 <th>Cost</th>
                                 <th>Status</th>
                                 <th>Manage</th>
@@ -27,20 +50,22 @@ const AllParcels = () => {
                         </thead>
                         <tbody>
                             {/* row 1 */}
-                            <tr>
-                                <td>1 </td>
-                                <td>Akas </td>
-                                <td>01245336</td>
-                                <td>12/04/2024</td>
-                                <td>12/04/2024</td>
-                                <td>1240</td>
-                                <td>pending</td>
-                                <td>
-                                    <button className="btn btn-sm">
-                                        ma
-                                    </button>
-                                </td>
-                            </tr>
+                            {parcelItem?.map(item => 
+                                <tr key={item._id}>
+                                    <td>{item?.name} </td>
+                                    <td>{item?.phone}</td>
+                                    <td>{item?.requestedDate}</td>
+                                    <td>12/04/2024</td>
+                                    <td>{item?.price}</td>
+                                    <td>{item?.status}</td>
+                                    <td>
+                                        <button onClick={open} className="btn btn-sm bg-green-400">
+                                            ma
+                                        </button>
+                                        <ManageModal isOpen={isOpen} close={close}></ManageModal>
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
 
                     </table>

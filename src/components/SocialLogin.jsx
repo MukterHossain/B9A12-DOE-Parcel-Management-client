@@ -1,7 +1,7 @@
 import { FaGoogle } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
 
@@ -9,6 +9,9 @@ const SocialLogin = () => {
     const { logInWithGoogle } = useAuth()
     const axiosPublic =useAxiosPublic()
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location?.state || '/'
 
 
     const handleGoogleLogin = () =>{
@@ -18,9 +21,11 @@ const SocialLogin = () => {
             // console.log(user)
             const userInfo = {
                 email: result.user?.email,
-                name: result.user?.displayName
+                name: result.user?.displayName,
+                image: result.user?.photoURL,
+                role: 'user',
             }
-            axiosPublic.post('/users', userInfo)
+            axiosPublic.put('/user', userInfo)
             .then(res =>{
                 console.log(res.data)
                 Swal.fire({
@@ -40,7 +45,7 @@ const SocialLogin = () => {
                       `
                     }
                   });
-                  navigate('/');
+                  navigate(from);
             })
 
         })

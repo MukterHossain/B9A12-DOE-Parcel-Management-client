@@ -1,65 +1,78 @@
-import { useForm } from "react-hook-form";
+import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 import SectionTitle from "../Shared/SectionTitle";
 import useAuth from "../hooks/useAuth";
-import Swal from "sweetalert2";
-import useAxiosPublic from "../hooks/useAxiosPublic";
-import { Helmet } from "react-helmet-async";
-import { useNavigate } from "react-router-dom";
+// import useAxiosPublic from "../hooks/useAxiosPublic";
+import { useForm } from "react-hook-form";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import LoadingSpinner from "../Shared/LoadingSpinner";
+import { useNavigate, useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+// import { useState } from "react";
 
 
-const BookParcel = () => {
+const UpdateBook = () => {
     const { user } = useAuth()
-    const axiosPublic = useAxiosPublic()
+    const {id} = useParams()
     const navigate = useNavigate()
+    // const [getUpdate, setGetUPdate] = useState('')
+    // const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
+    const { data: updateData = {}, isLoading} = useQuery({
+        queryKey: ['updateData', id],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/updateData/${id}`)
+            return res.data;
+        }
+    })
+    const {_id,phone, parcelType, parcelWeight,receiverName,receiverPhone,deliveryAddress,requestedDate,latitude,longitude, price} = updateData;
 
+    console.log( price)
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
+    
 
 
     const onSubmit = async (data) => {
-
-  
         // console.log(data)
-        const userInfo = {
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-            parcelType: data.parcelType,
-            parcelWeight: data.parcelWeight,
-            receiverName: data.receiverName,
-            receiverPhone: data.receiverPhone,
-            deliveryAddress: data.deliveryAddress,
-            requestedDate: data.requestedDate,
-            latitude: parseFloat(data.latitude),
-            longitude: parseFloat(data.longitude),
-            price: parseFloat(data.price),
-            status: 'Pending',
+        const updateInfo = {
+            name:data.name,
+            email:data.email,
+            phone:data.phone,
+            parcelType:data.parcelType,
+            parcelWeight:data.parcelWeight,
+            receiverName:data.receiverName,
+            receiverPhone:data.receiverPhone,
+            deliveryAddress:data.deliveryAddress,
+            requestedDate:data.requestedDate,
+            latitude:parseFloat(data.latitude),
+            longitude:parseFloat(data.longitude),
+            price:parseFloat(data.price) 
         }
+        // const updateInfo = {phone, parcelType, parcelWeight,receiverName,receiverPhone,deliveryAddress,requestedDate,latitude,longitude,price,status}
 
-  
-        const bookingsParcel = await axiosPublic.post('/bookings', userInfo)
-        console.log(bookingsParcel.data)
-        if (bookingsParcel.data.insertedId) {
-            // console.log('bookings added to the database')
+        try {
+
+            const { data } = await axiosSecure.put(`/updateBook/${_id}`, updateInfo)
+            Swal.fire("Updated Bookings Successfully")
+            console.log(data);
             reset()
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Sign up successfully",
-                showConfirmButton: false,
-                timer: 1500
-            });
             navigate('/dashboard/myParcel')
         }
+        catch (error) {
+            Swal.fire(" Bookings not successfully Update")
+        }
+    reset()
+       
 
     }
-
-
+    if (isLoading) return <LoadingSpinner></LoadingSpinner>
     return (
         <div>
             <Helmet>
-                <title>DOE Courier || Book Parcel</title>
+                <title>DOE Courier || Updated Booking</title>
             </Helmet>
-            <SectionTitle heading="Book a Parcel" ></SectionTitle>
+            <SectionTitle heading="Updated Booking" ></SectionTitle>
             <div className="max-w-3xl mx-auto">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="grid md:grid-cols-2 gap-x-6 gap-y-4">
@@ -69,7 +82,7 @@ const BookParcel = () => {
                                 <span className="label-text">Name</span>
                             </div>
                             <input type="text" defaultValue={user?.displayName}
-                                {...register("name", { required: true })} className="input input-bordered w-full " />
+                                {...register("price", { required: true })} className="input input-bordered w-full " />
                         </div>
                         <div className="form-control w-full ">
                             <div className="label">
@@ -86,7 +99,7 @@ const BookParcel = () => {
                             <div className="label">
                                 <span className="label-text">Phone Number*</span>
                             </div>
-                            <input type="number" {...register("phone", { required: true })}
+                            <input type="number" defaultValue={phone} {...register("phone", { required: true })}
                                 placeholder="Phone" className="input input-bordered w-full " />
                             {errors.phone && <span className="text-red-600">Phone Number is required</span>}
                         </div>
@@ -96,7 +109,7 @@ const BookParcel = () => {
                             <div className="label">
                                 <span className="label-text">Parcel Type*</span>
                             </div>
-                            <input type="text" {...register("parcelType", { required: true })}
+                            <input type="text" defaultValue={parcelType} {...register("parcelType", { required: true })}
                                 placeholder="parcel Type" className="input input-bordered w-full " />
                             {errors.parcelType && <span className="text-red-600">Parcel Type is required</span>}
                         </div>
@@ -108,7 +121,7 @@ const BookParcel = () => {
                             <div className="label">
                                 <span className="label-text">Parcel Weight*</span>
                             </div>
-                            <input type="number"{...register("parcelWeight", { required: true })} placeholder="Parcel Weight" className="input input-bordered w-full " />
+                            <input type="number" defaultValue={parcelWeight} {...register("parcelWeight", { required: true })} placeholder="Parcel Weight" className="input input-bordered w-full " />
                             {errors.parcelWeight && <span className="text-red-600">Parcel Weight is required</span>}
                         </div>
 
@@ -117,7 +130,7 @@ const BookParcel = () => {
                             <div className="label">
                                 <span className="label-text">Receivers Name*</span>
                             </div>
-                            <input type="text"{...register("receiverName", { required: true })}
+                            <input type="text" defaultValue={receiverName} {...register("receiverName", { required: true })}
                                 placeholder="Receivers Name" className="input input-bordered w-full " />
                             {errors.receiverName && <span className="text-red-600">Receivers Name is required</span>}
                         </div>
@@ -128,7 +141,7 @@ const BookParcel = () => {
                             <div className="label">
                                 <span className="label-text">Receiver Phone Number*</span>
                             </div>
-                            <input type="number"{...register("receiverPhone", { required: true })}
+                            <input type="number" defaultValue={receiverPhone} {...register("receiverPhone", { required: true })}
                                 placeholder="Receiver Phone Number" className="input input-bordered w-full " />
                             {errors.receiverPhone && <span className="text-red-600">Receiver Phone is required</span>}
                         </div>
@@ -138,7 +151,7 @@ const BookParcel = () => {
                             <div className="label">
                                 <span className="label-text">Parcel Delivery Address*</span>
                             </div>
-                            <input type="text"{...register("deliveryAddress", { required: true })}
+                            <input type="text" defaultValue={deliveryAddress} {...register("deliveryAddress", { required: true })}
 
                                 placeholder="Parcel Delivery Address" className="input input-bordered w-full " />
                             {errors.deliveryAddress && <span className="text-red-600">Parcel Delivery Address is required</span>}
@@ -150,7 +163,7 @@ const BookParcel = () => {
                             <div className="label">
                                 <span className="label-text">Requested Delivery Date*</span>
                             </div>
-                            <input type="date"{...register("requestedDate", { required: true })}
+                            <input type="date" defaultValue={requestedDate} {...register("requestedDate", { required: true })}
                                 placeholder="Requested Delivery Date" className="input input-bordered w-full " />
                             {errors.requestedDate && <span className="text-red-600">Requested Delivery Date is required</span>}
                         </div>
@@ -161,7 +174,7 @@ const BookParcel = () => {
                                 <span className="label-text">Delivery Address Latitude*</span>
                             </div>
                             <input type="number"
-                                step="any" {...register("latitude", { required: true })}
+                                step="any" defaultValue={latitude} {...register("latitude", { required: true })}
                                 placeholder="Delivery Address Latitude" className="input input-bordered w-full " />
                             {errors.latitude && <span className="text-red-600">Delivery Address Latitude is required</span>}
                         </div>
@@ -172,7 +185,7 @@ const BookParcel = () => {
                             <div className="label">
                                 <span className="label-text">Delivery Address longitude*</span>
                             </div>
-                            <input step="any" type="number" {...register("longitude", { required: true })}
+                            <input step="any" defaultValue={longitude} type="number" {...register("longitude", { required: true })}
                                 placeholder="Delivery Address longitude" className="input input-bordered w-full " />
                             {errors.longitude && <span className="text-red-600">Delivery Address longitude is required</span>}
                         </div>
@@ -180,11 +193,12 @@ const BookParcel = () => {
                         {/* price */}
                         <div className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Price*</span>
+                                <span className="label-text">Price* </span>
                             </div>
-                            <input type="number"{...register("price", { required: true })}
-                                placeholder="price" className="input input-bordered w-full " />
-                            {errors.price && <span className="text-red-600">Price is required</span>}
+                            <input type="number"  defaultValue={price} {...register("price", { required: true })}
+                                 className="input input-bordered w-full " />
+                                 {errors.price && <span className="text-red-600">price is required</span>}
+                            
                         </div>
                     </div>
 
@@ -199,4 +213,4 @@ const BookParcel = () => {
     );
 };
 
-export default BookParcel;
+export default UpdateBook;

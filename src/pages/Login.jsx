@@ -10,8 +10,9 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const from = location.state?.from?.pathname || '/'
-    // console.log('state in the location', location.state)
+    const from = location?.state || '/'
+    // const from = location.state?.from?.pathname || '/'
+
 
 
     const handleSubmit = event => {
@@ -27,21 +28,30 @@ const Login = () => {
                 Swal.fire({
                     title: "User Login Successful",
                     showClass: {
-                      popup: `
+                        popup: `
                         animate__animated
                         animate__fadeInUp
                         animate__faster
                       `
                     },
                     hideClass: {
-                      popup: `
+                        popup: `
                         animate__animated
                         animate__fadeOutDown
                         animate__faster
                       `
                     }
-                  });
-                  navigate(from, {replace:true});
+                });
+                navigate(from);
+            })
+            .catch(error => {
+                Swal.fire({
+                    position: "top-center",
+                    icon: "error",
+                    title: "Something is wrong",
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
     }
 
@@ -52,38 +62,33 @@ const Login = () => {
             <Helmet>
                 <title>DOE Courier || Login</title>
             </Helmet>
-            <div className="hero min-h-screen bg-base-200">
-                <div className="hero-content flex-col lg:flex-row-reverse">
-                    <div className="text-center md:w-1/2 lg:text-left">
-                        <h1 className="text-5xl font-bold">Login now!</h1>
+            <div className=" min-h-screen  mt-6">
+                <div className="py-4 w-4/5 md:w-2/5 lg:w-1/3 mx-auto rounded-xl shadow-2xl bg-base-100">
+                    <div className="text-center ">
+                        <h1 className="text-2xl text-blue-800 md:text-4xl font-bold">Login now!</h1>
+                        <p className="text-sm">Login to access your account </p>
                     </div>
-                    <div className="card  md:w-1/2 max-w-lg shadow-2xl bg-base-100">
-                        <form onSubmit={handleSubmit} className="card-body">
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Email</span>
-                                </label>
-                                <input type="email" name="email" placeholder="email" className="input input-bordered" required />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input type="password" name="password" placeholder="password" className="input input-bordered" required />
-                                <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                                </label>
-                            </div>
-                            
-                            <div className="form-control mt-6">
-                                <input  className="btn btn-primary" type="submit" value="Login" />
-                            </div>
-                        </form>
-                        <p className='px-6'><small>New Here? <Link to='/signup' className='text-blue-600 font-bold'>Create an account</Link></small></p>
-                        <SocialLogin></SocialLogin>
-                        {/* <p onClick={handleGoogleLogin} className="text-blue-500"> With Google </p> */}
-                        
-                    </div>
+                    <form onSubmit={handleSubmit} className="card-body">
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Email</span>
+                            </label>
+                            <input type="email" name="email" placeholder="email" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Password</span>
+                            </label>
+                            <input type="password" name="password" placeholder="password" className="input input-bordered" required />
+                        </div>
+
+                        <div className="form-control mt-6">
+                            <input className="btn btn-primary" type="submit" value="Login" />
+                        </div>
+                    </form>
+                    <p className='px-6 text-center'><small>New Here? <Link to='/signup' className='text-blue-600 font-bold'>Create an account</Link></small></p>
+                    <SocialLogin></SocialLogin>
+
                 </div>
             </div>
         </>

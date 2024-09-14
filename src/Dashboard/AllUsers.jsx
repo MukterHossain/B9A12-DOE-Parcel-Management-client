@@ -4,12 +4,13 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useQuery } from '@tanstack/react-query'
 import {  FaUsers } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
+import LoadingSpinner from "../Shared/LoadingSpinner";
 
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
 
-    const { data: users = [], refetch } = useQuery({
+    const { data: users = [], isLoading,refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users')
@@ -48,6 +49,7 @@ const AllUsers = () => {
                 }
             })
     }
+    if(isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
         <div>

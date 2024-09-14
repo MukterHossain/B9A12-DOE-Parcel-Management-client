@@ -21,6 +21,8 @@ import MyParcel from "../Dashboard/MyParcel";
 import MyProfile from "../Dashboard/MyProfile";
 import AllDeliveryMen from "../Dashboard/AllDeliveryMen";
 import Statistics from "../Dashboard/Statistics";
+import UpdateBook from "../Dashboard/UpdateBook";
+import Payment from "../Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -48,7 +50,9 @@ export const router = createBrowserRouter([
   },
   {
     path:'dashboard',
-    element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    element:<PrivateRoute>
+      <Dashboard></Dashboard>
+      </PrivateRoute>,
     children: [     
       {
         path:'userHome',
@@ -65,6 +69,15 @@ export const router = createBrowserRouter([
       {
         path:'profile',
         element: <MyProfile></MyProfile>
+      },
+      {
+        path:'update/:id',
+        element: <UpdateBook></UpdateBook>,
+        // loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/updateBook/${params.id}`)
+      },
+      {
+        path:'payment',
+        element: <Payment></Payment>,
       },
 
 

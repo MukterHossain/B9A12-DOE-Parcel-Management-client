@@ -14,8 +14,9 @@ const Navbar = () => {
 
     const handleLogOut = () => {
         logOutUser()
-            .then(() => { })
-            .catch(error => console.log(error))
+        
+            // .then(() => { })
+            // .catch(error => console.log(error))
     }
 
     const navOption = <>
@@ -63,7 +64,7 @@ const handleToggle = (e) => {
                                     width='70'
                                     height='70'
                                 />
-                                <h2><span className="text-3xl font-bold text-blue-700">DOE</span> <span className="text-sm text-green-700 font-bold">Courier</span></h2>
+                                <h2><span className="text-3xl font-bold text-blue-200">DOE</span> <span className="text-sm text-gray-100 font-bold">Courier</span></h2>
                             </div>
                         </Link>
                     </div>

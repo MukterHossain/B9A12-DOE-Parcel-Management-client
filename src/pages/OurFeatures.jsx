@@ -1,11 +1,26 @@
 
+import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../Shared/SectionTitle";
 import OurFeaturesCard from "./OurFeaturesCard";
-import useFeatureMenu from "../hooks/useFeatureMenu";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+
 
 
 const OurFeatures = () => {
-    const [features] = useFeatureMenu()
+    const axiosPublic = useAxiosPublic()
+    console.log(axiosPublic)
+
+    // const [features, setFeatures] = useState();
+    // const [loading, setLoading] = useState(true)
+    const {data:features = [], isLoading} = useQuery({
+        queryKey: ['features'],
+        queryFn: async () => {
+            const {data} = await axiosPublic.get(`/features`)
+            return data
+        }
+    })
+
+    if(isLoading) return <progress className="progress progress-success w-56" value="100" max="100"></progress>
 
     return (
         <div className="">

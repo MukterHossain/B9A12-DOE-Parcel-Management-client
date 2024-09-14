@@ -7,16 +7,17 @@ const useDeliverMen = () => {
     const {user,loading} = useAuth();
     
     const axiosSecure = useAxiosSecure();
-    const {data: isDeliveryMen, isPending: isAdminLoading} = useQuery({
+    const {data: isDeliveryMen, isPending: isDeliveryMenLoading} = useQuery({
         queryKey: [user?.email, 'isDeliveryMen'],
         queryFn: async() =>{
             const res = await axiosSecure.get(`/users/isDeliveryMen/${user.email}`);
             console.log(res.data)
-            return res.data?.isDeliveryMen
+            return res.data?.deliveryMen
         },
         enabled:!loading && !!localStorage.getItem('access-token')
     })
-    return [isDeliveryMen, isAdminLoading]
+    console.log(isDeliveryMen)
+    return [isDeliveryMen, isDeliveryMenLoading]
 };
 
 export default useDeliverMen;
