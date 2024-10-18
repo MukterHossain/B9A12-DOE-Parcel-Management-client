@@ -8,8 +8,8 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import { useNavigate, useParams } from "react-router-dom";
-// import { useParams } from "react-router-dom";
-// import { useState } from "react";
+// import {  useState } from "react";
+import { useEffect } from "react";
 
 
 const UpdateBook = () => {
@@ -17,8 +17,8 @@ const UpdateBook = () => {
     const {id} = useParams()
     const navigate = useNavigate()
     // const [getUpdate, setGetUPdate] = useState('')
-    // const axiosPublic = useAxiosPublic()
     const axiosSecure = useAxiosSecure()
+
     const { data: updateData = {}, isLoading} = useQuery({
         queryKey: ['updateData', id],
         queryFn: async () => {
@@ -26,11 +26,44 @@ const UpdateBook = () => {
             return res.data;
         }
     })
-    const {_id,phone, parcelType, parcelWeight,receiverName,receiverPhone,deliveryAddress,requestedDate,latitude,longitude, price} = updateData;
+    const {_id,phone, parcelType, weight,receiverName,receiverPhone,deliveryAddress,requestedDate,latitude,longitude, price} = updateData;
 
-    console.log( price)
-    const { register, handleSubmit, reset, formState: { errors }, } = useForm()
     
+    const { register, handleSubmit, reset, formState: { errors }, } = useForm()
+    useEffect(() =>{
+        if(updateData){
+            reset(updateData)
+        }
+    },[reset,updateData])
+
+    // const [weights, setWeights] = useState(weight || 0)
+    // const [prices, setPrices] = useState(price || 0)
+    // console.log('weights, prices', weights, prices);
+    console.log('weight, price', weight, price);
+    
+    // const calculatePrice = (weights) =>{
+        
+    //     if(weights <= 1){
+    //         return 50;
+    //     }
+    //     else if(weights <=2){
+    //         return 100
+    //     }
+    //     else{
+    //         return 150
+    //     }
+        
+    // }
+
+//     const handlePriceChange = (e) => {
+//         e.preventDefault()
+//         const inputWeight = parseFloat(e.target.value) ;        
+//         setWeights(inputWeight);
+//         const newPrice = calculatePrice(inputWeight);  
+//         setPrices(newPrice); 
+//         console.log('Updated Weight:', inputWeight);
+//   console.log('Calculated Price:', newPrice);
+//       };
 
 
     const onSubmit = async (data) => {
@@ -40,16 +73,17 @@ const UpdateBook = () => {
             email:data.email,
             phone:data.phone,
             parcelType:data.parcelType,
-            parcelWeight:data.parcelWeight,
+            weight:data.weight,
+            // weight:data.weights,
             receiverName:data.receiverName,
             receiverPhone:data.receiverPhone,
             deliveryAddress:data.deliveryAddress,
             requestedDate:data.requestedDate,
             latitude:parseFloat(data.latitude),
             longitude:parseFloat(data.longitude),
-            price:parseFloat(data.price) 
+            price: parseFloat(data.price),
+            // price: parseFloat(price),
         }
-        // const updateInfo = {phone, parcelType, parcelWeight,receiverName,receiverPhone,deliveryAddress,requestedDate,latitude,longitude,price,status}
 
         try {
 
@@ -82,7 +116,7 @@ const UpdateBook = () => {
                                 <span className="label-text">Name</span>
                             </div>
                             <input type="text" defaultValue={user?.displayName}
-                                {...register("price", { required: true })} className="input input-bordered w-full " />
+                                {...register("name", { required: true })} className="input input-bordered w-full " />
                         </div>
                         <div className="form-control w-full ">
                             <div className="label">
@@ -116,13 +150,13 @@ const UpdateBook = () => {
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-x-6 gap-y-4 mt-3">
-                        {/* Parcel Weight */}
+                        {/* Parcel Weight defaultValue={weight}onChange={handlePriceChange}*/}
                         <div className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Parcel Weight*</span>
+                                <span className="label-text">Parcel Weight kg*</span>
                             </div>
-                            <input type="number" defaultValue={parcelWeight} {...register("parcelWeight", { required: true })} placeholder="Parcel Weight" className="input input-bordered w-full " />
-                            {errors.parcelWeight && <span className="text-red-600">Parcel Weight is required</span>}
+                            <input type="number" defaultValue={weight}    {...register("weight", { required: true })} placeholder="Parcel Weight" className="input input-bordered w-full " />
+                            {errors.weight && <span className="text-red-600">Parcel Weight is required</span>}    
                         </div>
 
                         {/* Receiver’s Name */}
@@ -187,24 +221,23 @@ const UpdateBook = () => {
                             </div>
                             <input step="any" defaultValue={longitude} type="number" {...register("longitude", { required: true })}
                                 placeholder="Delivery Address longitude" className="input input-bordered w-full " />
-                            {errors.longitude && <span className="text-red-600">Delivery Address longitude is required</span>}
+                            {errors.price && <span className="text-red-600">Delivery Address longitude is required</span>}
                         </div>
 
-                        {/* price */}
+                        {/* price  defaultValue={price}*/}
                         <div className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Price* </span>
                             </div>
-                            <input type="number"  defaultValue={price} {...register("price", { required: true })}
-                                 className="input input-bordered w-full " />
-                                 {errors.price && <span className="text-red-600">price is required</span>}
-                            
+                            <input step='any'  defaultValue={price} type="number" {...register("price", { required: true })}
+                                placeholder="price" className="input input-bordered w-full "  />
+                            {errors.price && <span className="text-red-600">Price is required</span>}
                         </div>
                     </div>
 
                     <div className="w-2/5 md:w-3/12 mx-auto mt-6">
                         <button className="btn bg-green-400">
-                            Book Now
+                           Update Book
                         </button>
                     </div>
                 </form>

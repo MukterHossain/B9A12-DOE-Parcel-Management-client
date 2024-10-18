@@ -13,8 +13,8 @@ Currently, two official plugins are available:
 [https://b9a12-doe-parcel-management.web.app]
 
 ## User Section
-- Admin username = 
--  password = 
+- Admin username = Mazharul Islam
+-  password = 1234Ab*
 
 
 ## features and characteristics 

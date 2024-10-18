@@ -1,18 +1,17 @@
 
 
 const TopDeliveryManCard = ({item}) => {
-    const {name, image, email } = item;
+    // const {name, image, email,parcelsDelivered } = item;
     
     return (
         <div>
-            <div className="card card-compact w-full bg-base-100 shadow-xl">
-                <img className="w-[80px] h-[70px]" src={image} alt="" />
-                <div className="card-body">
-                    <h2 className="card-title uppercase text-blue-600 font-bold">{name}</h2>
-                    <p>{email}</p>
-                    {/* <p>Total Booked: {totalBooked}</p>
-                    <p>Total Delivered: {totalDelivered}</p>
-                    <p>Total User: {totalUse}</p> */}
+            <div className="card card-compact text-black w-full shadow-xl bg-rose-100 hover:scale-105 transition-all ">
+                <img className="w-1/4 min-h-24 rounded-full mx-auto  group-hover:scale-125" src={item?.image} alt="" />
+                <div className="card-body ">
+                    <h2 className="card-title "><span className="text-xl font-semibold text-gray-800">Delivery Man Name:</span> <span className="uppercase text-blue-600 text-2xl font-bold">{item?.name}</span></h2>
+                    <p className="text-sm font-semibold text-gray-800">Total Booked: <span className=" text-blue-600 text-xl font-bold">{item?.parcelsDelivered}</span></p>
+                    {/* <p>Total Delivered: {item?.averageRating.toFixed(1)}</p> */}
+                    <p className="text-sm font-semibold text-gray-800">Total Delivered: <span className="text-blue-600 text-lg font-bold">{item?.averageRating}</span></p>
                 </div>
             </div>
         </div>

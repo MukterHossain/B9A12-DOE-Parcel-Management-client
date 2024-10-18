@@ -10,7 +10,7 @@ table {
   td, th {
     border: 1px solid #dddddd;
     text-align: left;
-    padding: 8px;
+    padding: 6px;
   }
   
   tr:nth-child(even) {
@@ -22,3 +22,10 @@ table {
   thead > tr:nth-child(odd) {
     background-color: #e1cdf6;
   }
+
+  .leaflet-container{
+    height : 350px;
+    width: 100%;
+    }
+
+  

@@ -93,7 +93,7 @@ const SignUp = () => {
                                 <select defaultValue=" " {...register('type', { required: true })} className="select select-bordered w-full">
                                     <option disabled value="">Select a Type</option>
                                     <option  value="user">User</option>
-                                    <option value="admin">Admin</option>
+                                    {/* <option value="admin">Admin</option> */}
                                     <option value="deliveryMen">Delivery Men</option>
                                 </select>
                                 {errors.type && <span className="text-red-600">Photo URL is required</span>}

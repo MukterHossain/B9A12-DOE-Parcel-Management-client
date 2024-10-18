@@ -5,34 +5,54 @@ import Swal from "sweetalert2";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 
 const BookParcel = () => {
     const { user } = useAuth()
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
-
+    const [weight, setWeight] = useState(0)
+    const [price, setPrice] = useState(0)
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
+    const calculatePrice = (weight) =>{       
+        if(weight <= 1){
+            return 50;
+        }
+        else if(weight <=2){
+            return 100
+        }
+        else{
+            return 150
+        }      
+    }
+    const handlePriceChange = (e) => {
+        e.preventDefault()
+        const inputWeight = parseFloat(e.target.value) ;        
+        setWeight(inputWeight);
+        const newPrice = calculatePrice(inputWeight);  
+        setPrice(newPrice); 
+      };
 
-
-    const onSubmit = async (data) => {
-
-  
+console.log('data')
+    const onSubmit = async (data) => { 
         // console.log(data)
         const userInfo = {
             name: data.name,
             email: data.email,
             phone: data.phone,
             parcelType: data.parcelType,
-            parcelWeight: data.parcelWeight,
+            weight: data.weight,
             receiverName: data.receiverName,
             receiverPhone: data.receiverPhone,
             deliveryAddress: data.deliveryAddress,
             requestedDate: data.requestedDate,
             latitude: parseFloat(data.latitude),
             longitude: parseFloat(data.longitude),
-            price: parseFloat(data.price),
+            // price: parseFloat(data.price),
+            price: parseFloat(price),
             status: 'Pending',
+            bookingDate: new Date().toLocaleDateString(),
         }
 
   
@@ -53,6 +73,7 @@ const BookParcel = () => {
 
     }
 
+   
 
     return (
         <div>
@@ -106,10 +127,10 @@ const BookParcel = () => {
                         {/* Parcel Weight */}
                         <div className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Parcel Weight*</span>
+                                <span className="label-text">Parcel Weight kg*</span>
                             </div>
-                            <input type="number"{...register("parcelWeight", { required: true })} placeholder="Parcel Weight" className="input input-bordered w-full " />
-                            {errors.parcelWeight && <span className="text-red-600">Parcel Weight is required</span>}
+                            <input type="number"  value={weight} {...register("weight", { required: true })} onChange={ handlePriceChange}  placeholder="Parcel Weight" className="input input-bordered w-full " />
+                            {errors.weight && <span className="text-red-600">Parcel Weight is required</span>}
                         </div>
 
                         {/* Receiver’s Name */}
@@ -150,7 +171,7 @@ const BookParcel = () => {
                             <div className="label">
                                 <span className="label-text">Requested Delivery Date*</span>
                             </div>
-                            <input type="date"{...register("requestedDate", { required: true })}
+                            <input type="date" {...register("requestedDate", { required: true })}
                                 placeholder="Requested Delivery Date" className="input input-bordered w-full " />
                             {errors.requestedDate && <span className="text-red-600">Requested Delivery Date is required</span>}
                         </div>
@@ -177,14 +198,14 @@ const BookParcel = () => {
                             {errors.longitude && <span className="text-red-600">Delivery Address longitude is required</span>}
                         </div>
 
-                        {/* price */}
+                        {/* price readOnly */}
                         <div className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Price*</span>
                             </div>
-                            <input type="number"{...register("price", { required: true })}
-                                placeholder="price" className="input input-bordered w-full " />
-                            {errors.price && <span className="text-red-600">Price is required</span>}
+                            <input type="number" value={price} {...register("price", { required: true })}
+                                placeholder="price" className="input input-bordered w-full "  />
+                            {errors.price && <span className="text-red-600">Price is required</span>} 
                         </div>
                     </div>
 

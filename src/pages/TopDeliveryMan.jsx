@@ -1,33 +1,33 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../Shared/SectionTitle";
-import useAxiosSecure from "../hooks/useAxiosSecure";
-
-import TopDeliveryManCard from "./TopDeliveryManCard";
-
+import TopDeliveryManCard from "./TopDeliveryManCard"
+import LoadingSpinner from "../Shared/LoadingSpinner";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 
 const TopDeliveryMan = () => {
 
-    const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
 
 
-    const { data: users = [] } = useQuery({
-        queryKey: ['bookings'],
+    const { data: topDeliveryMen = [], isLoading } = useQuery({
+        queryKey: ['topDeliMen'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/bookings')
+            const res = await axiosPublic.get('/topDeliMen')
             return res.data;
         }
     })
+    console.log('topDeliveryMen', topDeliveryMen);
 
    
 
-   
+    if (isLoading) return <LoadingSpinner></LoadingSpinner>
     return (
         <div className="my-20">
             <SectionTitle heading={"Top Delivery Man"} subHeading={"Traditional couriers have a fleet of vehicles like motorcycle, car, van, and truck to transport goods from one location to another"}></SectionTitle>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 justify-center gap-4">
                 {
-                users?.map(item => <TopDeliveryManCard key={item._id} item={item}></TopDeliveryManCard>)
+                topDeliveryMen?.map(item => <TopDeliveryManCard key={item._id} item={item}></TopDeliveryManCard>)
                 
                 }               
             </div>

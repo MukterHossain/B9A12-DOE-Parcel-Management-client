@@ -1,27 +1,25 @@
 import { Link, NavLink } from "react-router-dom";
-import avatarImg from '../assets/profile.jpg'
+import avatarImg from '../assets/altLogo.jpg'
 import { MdNotificationsActive } from "react-icons/md";
 import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
+import useAdmin from "../hooks/useAdmin";
+import useDeliverMen from "../hooks/useDeliverMen";
 
 
 const Navbar = () => {
     const { user, logOutUser } = useAuth()
     const [isOpen, setIsOpen] = useState(false)
+    const [isAdmin] = useAdmin();
+    const [isDeliveryMen] = useDeliverMen();
     const [theme, setTheme] = useState('light');
-
-
-
     const handleLogOut = () => {
         logOutUser()
-        
-            // .then(() => { })
-            // .catch(error => console.log(error))
     }
 
     const navOption = <>
         <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+        <li><NavLink to={isAdmin ? `/dashboard/statistics`: isDeliveryMen ? '/dashboard/deliveryList': '/dashboard/bookParcel'}>Dashboard</NavLink></li>
         <li><NavLink to='/contact'>Contact Us</NavLink></li>
     </>
 
@@ -32,7 +30,7 @@ useEffect(() => {
 }, [theme])
 const handleToggle = (e) => {
     if (e.target.checked) {
-        setTheme('synthwave')
+        setTheme('dark')
     }
     else {
         setTheme('light')
@@ -117,7 +115,7 @@ const handleToggle = (e) => {
                                         <>
                                             <h2 className="text-[16px]  block  px-4 pt-2 hover:bg-neutral-100 text-blue-800 transition font-bold">{user?.displayName}</h2>
                                             <Link
-                                                to='/dashboard'
+                                                to={isAdmin ? `/dashboard/statistics`: isDeliveryMen ? '/dashboard/deliveryList': '/dashboard/bookParcel'}
                                                 className='block  px-4 py-3 hover:bg-neutral-100 text-black  transition font-semibold'
                                             >
                                                 Dashboard

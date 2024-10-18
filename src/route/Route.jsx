@@ -23,6 +23,7 @@ import AllDeliveryMen from "../Dashboard/AllDeliveryMen";
 import Statistics from "../Dashboard/Statistics";
 import UpdateBook from "../Dashboard/UpdateBook";
 import Payment from "../Payment/Payment";
+import MyBooking from "../Dashboard/MyBooking";
 
 export const router = createBrowserRouter([
   {
@@ -73,11 +74,14 @@ export const router = createBrowserRouter([
       {
         path:'update/:id',
         element: <UpdateBook></UpdateBook>,
-        // loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/updateBook/${params.id}`)
       },
       {
-        path:'payment',
+        path:'payment/:id',
         element: <Payment></Payment>,
+      },
+      {
+        path:'myBooking',
+        element: <MyBooking></MyBooking>,
       },
 
 

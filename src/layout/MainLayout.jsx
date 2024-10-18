@@ -6,9 +6,10 @@ import Footer from "../components/Footer";
 const MainLayout = () => {
     const location = useLocation();
     console.log(location)
+    // <div className='max-w-screen-xl mx-auto'>
     const noHeaderFooter = location.pathname.includes('login') || location.pathname.includes('signup')
     return (
-        <div className="">
+        <div className="max-w-screen-xl mx-auto">
             {noHeaderFooter || <Navbar></Navbar>}
             <div className="">
                 <Outlet></Outlet>

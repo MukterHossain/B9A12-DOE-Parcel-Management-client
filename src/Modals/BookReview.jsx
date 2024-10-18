@@ -1,67 +1,73 @@
 import PropTypes from 'prop-types'
 import { Dialog, Transition, TransitionChild, DialogTitle, DialogPanel, } from '@headlessui/react'
-import { Fragment, useState } from 'react'
-import LoadingSpinner from '../Shared/LoadingSpinner';
-import { useNavigate } from 'react-router-dom';
+import { Fragment, } from 'react'
+// import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import useAuth from '../hooks/useAuth';
-import { useQuery } from '@tanstack/react-query';
+// import { useQuery } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
 
-const BookReview = ({ isOpen, close }) => {
+
+const BookReview = ({ isOpen, close ,id,refetch}) => {
     // const { user , loading} = useAuth() {open, close, isOpen}
-    const { user, loading } = useAuth()
+    const { user } = useAuth()
     // const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
-    const navigate = useNavigate()
-    const [rating, setRating] = useState('');
+    const { register, handleSubmit, reset, } = useForm()
+    // const [rating, setRating] = useState('');
 
     // const [selected, setSelected] = useState(user)
     // console.log(isOpen);
-    // console.log(typeof isOpen);
+    console.log('user',id)
+    // console.log(index);
 
-    const { data: review = [], refetch } = useQuery({
-        queryKey: ['review', user?.email],
-        queryFn: async () => {
-            const { data } = await axiosSecure.get(`/review/${user?.email}`)
-            return data;
-        }
-    })
+    // const { data: review = [], refetch } = useQuery({
+    //     queryKey: ['reviewData', user?.email],
+    //     queryFn: async () => {
+    //         const { data } = await axiosSecure.get(`/reviewData/${user?.email}`)
+    //         return data;
+    //     }
+    // })
+   
 
     // rating
-    const handleInputChange = (e) => {
-        const value = parseInt(e.target.value, 10);
-        if (value >= 0 && value <= 5) {
-            setRating(value);
-        }
-    }
+    // const handleInputChange = (e) => {
+    //     const value = parseFloat(e.target.value, 10);
+    //     if (value >= 0 && value <= 5) {
+    //         setRating(value);
+    //     }
+    // }
+    // const id = review._id;
+    // console.log(id)
 
     // Review submit
-    const handleReviewSubmit = async (event, id) => {
-        event.preventDefault();
-        const form = event.target;
-        const name = form.name.value
-        const photo = form.photoURL.value
-        const reviewId = form.reviewId.value
-        const feedback = form.feedback.value
-        const rating = parseFloat(form.rating.value)
-        const reviewData = { name, photo, rating, feedback, reviewId }
+    const handleReviewSubmit = async (data) => {
+        const reviewData = {
+            name: data.name,
+            image: data.image,
+            rating: data.rating,
+            feedback: data.feedback,
+            deliveryMenId: data.deliveryMenId,
+            date: new Date().toLocaleDateString(),
+        }
         console.table(reviewData);
+
         try {
-            const reviewInfo = await axiosSecure.put(`/review${id}`, reviewData)
-            console.log(reviewInfo.data)
+            const reviewInfo = await axiosSecure.post(`/review/${id}`, reviewData)
             if (reviewInfo.data.insertedId) {
-                // console.log('bookings added to the database')
-                refetch()
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: "Sign up successfully",
+                    title: "Review set successfully",
                     showConfirmButton: false,
                     timer: 1500
                 });
-                navigate('/dashboard/profile')
-            }
+                
+                
+                // navigate('/dashboard/profile')
+            }refetch()
+            close()
         } catch (error) {
             Swal.fire({
                 icon: "error",
@@ -75,7 +81,6 @@ const BookReview = ({ isOpen, close }) => {
 
     }
 
-    if (loading) return <LoadingSpinner></LoadingSpinner>
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog as='div' className='relative z-10' onClose={close}>
@@ -108,46 +113,55 @@ const BookReview = ({ isOpen, close }) => {
                                     as='h3'
                                     className='text-lg font-medium text-center leading-6 text-gray-900'
                                 >
-                                     Give Your Review
+                                    Give Your Review
                                 </DialogTitle>
                                 {/* Review Form */}
                                 <div className="rounded-lg">
-                                    <form onSubmit={handleReviewSubmit} className="">
+                                    <form onSubmit={handleSubmit(handleReviewSubmit)} className="">
                                         <div className="form-control grid md:grid-cols-2 justify-between gap-4 ">
-                                            <div>
-                                                <label className="">
-                                                    <span className="text-white">User Name</span>
-                                                    <br />
-                                                </label>
-                                                <input type="text" name='name' defaultValue={user?.displayName} placeholder="email" className="input input-bordered w-full" required />
+                                            <div className="form-control w-full">
+                                                <div className="label">
+                                                    <span className="label-text">User Name</span>
+                                                </div>
+                                                <input type="text" defaultValue={user?.displayName}
+                                                    {...register("name", { required: true })} className="input input-bordered w-full " />
                                             </div>
-                                            <div>
-                                                <label className="">
-                                                    <span className="text-white">User Photo</span>
-                                                    <br />
-                                                </label>
-                                                <input type="text" name='photoURL' defaultValue={user?.photoURL} placeholder="email" className="input input-bordered w-full" required />
+                                            <div className="form-control w-full">
+                                                <div className="label">
+                                                    <span className="label-text">User Photo</span>
+                                                </div>
+                                                <input type="text" defaultValue={user?.photoURL}
+                                                    {...register("image", { required: true })} className="input input-bordered w-full " />
                                             </div>
-                                            <div>
-                                                <label className="">
-                                                    <span className="text-white"> Rating</span>
-                                                    <br />
-                                                </label>
+
+                                            {/* <div>
                                                 <input type="number" step="0.1" min="0" max="5" value={rating} onChange={handleInputChange} name='rating' placeholder="Rate between 0 to 5" className="input input-bordered w-full" required />
+                                            </div> */}
+                                            <div className="form-control w-full">
+                                                <div className="label">
+                                                    <label htmlFor="rating">Rating</label>
+                                                    <span className="label-text">Rating</span>
+                                                </div>
+                                                {/* value={rating} onChange={handleInputChange} */}
+                                                <input type="number" id="rating" name="rating" min="1" max="5" 
+                                                      placeholder="Rate between 0 to 5"
+                                                    {...register("rating", { required: true, min:1, max:5 })} className="input input-bordered w-full " />
                                             </div>
-                                            <div>
-                                                <label className="">
-                                                    <span className="text-white"> Feedback</span>
-                                                    <br />
-                                                </label>
-                                                <input type="text" name='feedback' placeholder="Feedback" className="input input-bordered w-full" required />
+                                            <div className="form-control w-full">
+                                                <div className="label">
+                                                    <span className="label-text">Feedback</span>
+                                                </div>
+                                                <input type="text" {...register("feedback", { required: true })} className="input input-bordered w-full " />
                                             </div>
                                         </div>
-                                        <div className="form-control mt-2">
-                                            <label className="">
-                                                <span className="text-white">Delivery Men’s Id</span>
-                                            </label>
+                                        {/* <div className="form-control mt-2">
                                             <input type="text" name='reviewId' defaultValue={review?._id} className="input input-bordered w-full" required />
+                                        </div> */}
+                                        <div className="form-control w-full">
+                                            <div className="label">
+                                                <span className="label-text">Delivery Men’s Id</span>
+                                            </div>
+                                            <input type="text" defaultValue={id} {...register("deliveryMenId", { required: true })} className="input input-bordered w-full " />
                                         </div>
                                         <div className="form-control mt-6">
                                             <button className="btn bg-green-600 text-white hover:text-blue-800 font-bold hover:bg-gray-200 transition-colors duration-300 ">Submit</button>

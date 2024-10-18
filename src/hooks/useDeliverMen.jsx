@@ -11,12 +11,12 @@ const useDeliverMen = () => {
         queryKey: [user?.email, 'isDeliveryMen'],
         queryFn: async() =>{
             const res = await axiosSecure.get(`/users/isDeliveryMen/${user.email}`);
-            console.log(res.data)
+            // console.log(res.data)
             return res.data?.deliveryMen
         },
         enabled:!loading && !!localStorage.getItem('access-token')
     })
-    console.log(isDeliveryMen)
+    // console.log(isDeliveryMen)
     return [isDeliveryMen, isDeliveryMenLoading]
 };
 
