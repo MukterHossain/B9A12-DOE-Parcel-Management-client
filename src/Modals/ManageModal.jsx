@@ -5,7 +5,7 @@ import { Fragment, } from 'react'
 
 const ManageModal = ({ isOpen, close, setSelectedMan, selectedMan, setDeliveryDate, handleAssign, allDeliveryMen, deliveryDate, id }) => {
 
-  console.log('user',id)
+  
 
 
 

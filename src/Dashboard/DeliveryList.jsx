@@ -72,7 +72,7 @@ const DeliveryList = () => {
         }
 
     }
-    //  Status change to Delivered       patch
+    //  Status change to Delivered   
     const handleDelivered = async (id) => {
         const status = 'Delivered';
         const deliveredChange = { status }
@@ -119,7 +119,6 @@ const DeliveryList = () => {
             </Helmet>
             <SectionTitle heading={"Delivery List"}></SectionTitle>
             <div>
-                <p>Delivery Men Name: {user?.displayName} </p>
                 <div className=" -mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                     <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
                         <table className="table">
@@ -149,7 +148,6 @@ const DeliveryList = () => {
                                         <td>{item?.approximateDate}</td>
                                         <td>{item?.receiverPhone}</td>
                                         <td>{item?.deliveryAddress}</td>
-                                        {/* <td>{item?.status}</td> */}
                                         <td>
                                             <button onClick={() => open(item?._id)}
                                                 className="btn btn-sm bg-green-400">

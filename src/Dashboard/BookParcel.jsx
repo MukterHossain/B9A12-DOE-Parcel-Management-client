@@ -36,7 +36,6 @@ const BookParcel = () => {
 
 console.log('data')
     const onSubmit = async (data) => { 
-        // console.log(data)
         const userInfo = {
             name: data.name,
             email: data.email,
@@ -49,7 +48,6 @@ console.log('data')
             requestedDate: data.requestedDate,
             latitude: parseFloat(data.latitude),
             longitude: parseFloat(data.longitude),
-            // price: parseFloat(data.price),
             price: parseFloat(price),
             status: 'Pending',
             bookingDate: new Date().toLocaleDateString(),
@@ -59,7 +57,6 @@ console.log('data')
         const bookingsParcel = await axiosPublic.post('/bookings', userInfo)
         console.log(bookingsParcel.data)
         if (bookingsParcel.data.insertedId) {
-            // console.log('bookings added to the database')
             reset()
             Swal.fire({
                 position: "top-end",

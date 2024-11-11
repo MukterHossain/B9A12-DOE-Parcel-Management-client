@@ -64,7 +64,6 @@ const AllParcels = () => {
       deliveryMenId: selectedMan,
       approximateDate: deliveryDate,
     };
-    console.log(deliveryMenInfo)
 
 
     try {
@@ -106,10 +105,7 @@ const AllParcels = () => {
   const handleSearch = e => {
     e.preventDefault()
     refetch();
-    // console.log('formDate', e);
-
   }
-   console.log('parcelItem',parcelItem);
 
 
   if (isLoading) return <LoadingSpinner></LoadingSpinner>
@@ -130,7 +126,7 @@ const AllParcels = () => {
             </div>
           </form>
         </div>
-        <h1> parcelItem {parcelItem.length}</h1>
+       
         <div className=" -mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
             <table className="table">

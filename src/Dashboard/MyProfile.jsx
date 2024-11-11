@@ -30,13 +30,10 @@ const MyProfile = () => {
             return res.data;
         }
     })
-    // console.log(userRole)
     const { _id } = userProfile;
-    console.log('User Id', _id)
 
     // Image upload
     const onSubmit = async (data) => {
-        console.log(data)
 
         try {
             const imageFile = { image: data.image[0] }

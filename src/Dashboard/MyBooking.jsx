@@ -32,7 +32,6 @@ const MyBooking = () => {
             return () => clearTimeout(timer);
         }
     }, [bookedData]);
-    console.log('bookedData', bookedData);
 
 
     if (isLoading) return <LoadingSpinner></LoadingSpinner>

@@ -29,10 +29,7 @@ const AllUsers = () => {
         queryKey: ['userCount'],
         queryFn: async () => {
             const res = await axiosSecure.get('/userCount')
-            // setPageNum(res?.count)
-            // setCount(res?.count)
             setCount(res?.data.count)
-            // setPageNum(res?.data.length)
             return res.data;
         }
     })
@@ -95,9 +92,8 @@ const AllUsers = () => {
                 <title>DOE Courier || All Users</title>
             </Helmet>
             <SectionTitle heading={"All Users"}></SectionTitle>
-            <div className=" -mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+            <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                 <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                    <h2>Users {users.length}</h2>
                     <table className="table">
                         {/* head */}
                         <thead>

@@ -5,7 +5,6 @@ import CheckoutForm from "./CheckoutForm";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-// import '../Payment/CheckoutForm.css'
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK)
@@ -13,7 +12,7 @@ const Payment = () => {
     const { id } = useParams()
     const axiosSecure = useAxiosSecure();
 
-    const { data: payBookData = [], isLoading, refetch } = useQuery({
+    const { data: payBookData = [] } = useQuery({
         queryKey: ['payment-book', id],
         queryFn: async () => {
             const res = await axiosSecure.get(`/payment-book/${id}`)

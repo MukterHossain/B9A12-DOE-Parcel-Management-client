@@ -2,7 +2,6 @@ import { Dialog, Transition, TransitionChild, DialogTitle, DialogPanel, } from '
 import { useQuery } from '@tanstack/react-query';
 import { Fragment, } from 'react'
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
-// import { FaMapMarkerAlt } from "react-icons/fa";
 import 'leaflet/dist/leaflet.css';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 
@@ -16,9 +15,7 @@ const LocationMap = ({ isOpen, close, id, }) => {
       return data
     }
   })
-  console.log('locationData', locationData);
   const position = [locationData?.latitude, locationData?.longitude]
-//<FaMapMarkerAlt></FaMapMarkerAlt>
 if(isLoading) return <p className='text-sm'></p>
   return (
     <>

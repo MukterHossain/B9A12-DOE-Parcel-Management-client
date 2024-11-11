@@ -4,7 +4,6 @@ import altLogo from '../../src/assets/altLogo.jpg'
 
 const ReviewsCard = ({ item }) => {
     const { name, image, rating, feedback, date } = item;
-    console.log('image',image);
 
     return (
         <div>
@@ -16,7 +15,6 @@ const ReviewsCard = ({ item }) => {
                     <p>date: {date}</p>
                     <hr />
                     <div className="space-y-2">
-                        {/* <p>Total Booked: <span className="text-blue-600 font-bold"> <CountUp duration={2.5} end={rating}></CountUp></span></p> */}
                         <p>rating {rating}</p>
 
                     </div>

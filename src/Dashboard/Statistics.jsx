@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Chart from 'react-apexcharts'
-// import useAuth from "../hooks/useAuth";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import { useEffect, useState } from "react";
 import SectionTitle from "../Shared/SectionTitle";
@@ -29,9 +28,6 @@ const Statistics = () => {
       return res.data;
     }
   })
-  // console.log('chartData', dataChart)
-  console.log('lineData', lineData)
-  console.log('data', data)
 
 // bar chart
   const [chartData, setChartData] = useState({

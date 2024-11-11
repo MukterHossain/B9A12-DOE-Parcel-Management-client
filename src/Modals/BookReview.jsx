@@ -1,45 +1,16 @@
 import PropTypes from 'prop-types'
 import { Dialog, Transition, TransitionChild, DialogTitle, DialogPanel, } from '@headlessui/react'
 import { Fragment, } from 'react'
-// import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import useAuth from '../hooks/useAuth';
-// import { useQuery } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 
 
 const BookReview = ({ isOpen, close ,id,refetch}) => {
-    // const { user , loading} = useAuth() {open, close, isOpen}
     const { user } = useAuth()
-    // const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
-    const { register, handleSubmit, reset, } = useForm()
-    // const [rating, setRating] = useState('');
-
-    // const [selected, setSelected] = useState(user)
-    // console.log(isOpen);
-    console.log('user',id)
-    // console.log(index);
-
-    // const { data: review = [], refetch } = useQuery({
-    //     queryKey: ['reviewData', user?.email],
-    //     queryFn: async () => {
-    //         const { data } = await axiosSecure.get(`/reviewData/${user?.email}`)
-    //         return data;
-    //     }
-    // })
-   
-
-    // rating
-    // const handleInputChange = (e) => {
-    //     const value = parseFloat(e.target.value, 10);
-    //     if (value >= 0 && value <= 5) {
-    //         setRating(value);
-    //     }
-    // }
-    // const id = review._id;
-    // console.log(id)
+    const { register, handleSubmit } = useForm()
 
     // Review submit
     const handleReviewSubmit = async (data) => {
@@ -51,7 +22,6 @@ const BookReview = ({ isOpen, close ,id,refetch}) => {
             deliveryMenId: data.deliveryMenId,
             date: new Date().toLocaleDateString(),
         }
-        console.table(reviewData);
 
         try {
             const reviewInfo = await axiosSecure.post(`/review/${id}`, reviewData)
@@ -63,9 +33,6 @@ const BookReview = ({ isOpen, close ,id,refetch}) => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                
-                
-                // navigate('/dashboard/profile')
             }refetch()
             close()
         } catch (error) {

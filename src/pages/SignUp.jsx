@@ -17,7 +17,6 @@ const SignUp = () => {
     const location = useLocation();
 
     const from = location?.state || '/'
-    // const axiosSecure = useAxiosSecure()
 
 
 
@@ -29,7 +28,6 @@ const SignUp = () => {
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
                         console.log('user profile info updated')
-                        // create user entry in the database
                         const userInfo = {
                             name: data.name,
                             email: data.email,
@@ -39,7 +37,6 @@ const SignUp = () => {
                         axiosPublic.put('/user', userInfo)
                             .then(res => {
                                 if (res.data.insertedId) {
-                                    // console.log('user added to the database')
                                     reset()
                                     Swal.fire({
                                         position: "top-end",
@@ -48,7 +45,6 @@ const SignUp = () => {
                                         showConfirmButton: false,
                                         timer: 1500
                                     });
-                                    // navigate(from);
                                 }
                             })
                             navigate(from);
@@ -64,7 +60,6 @@ const SignUp = () => {
                     })
             })
     }
-    // console.log(watch("example"))
 
     return (
         <>
@@ -93,7 +88,6 @@ const SignUp = () => {
                                 <select defaultValue=" " {...register('type', { required: true })} className="select select-bordered w-full">
                                     <option disabled value="">Select a Type</option>
                                     <option  value="user">User</option>
-                                    {/* <option value="admin">Admin</option> */}
                                     <option value="deliveryMen">Delivery Men</option>
                                 </select>
                                 {errors.type && <span className="text-red-600">Photo URL is required</span>}

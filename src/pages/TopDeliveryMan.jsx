@@ -17,7 +17,6 @@ const TopDeliveryMan = () => {
             return res.data;
         }
     })
-    console.log('topDeliveryMen', topDeliveryMen);
 
    
 

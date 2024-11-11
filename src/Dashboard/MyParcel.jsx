@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../Shared/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
-// import useAxiosPublic from "../hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { GiCancel } from "react-icons/gi";
@@ -11,14 +10,9 @@ import LoadingSpinner from "../Shared/LoadingSpinner";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import BookReview from "../Modals/BookReview";
-// import { Dialog, DialogPanel } from '@headlessui/react'
-
-//DialogTitle
 
 const MyParcel = () => {
     const { user } = useAuth()
-    // const navigate = useNavigate()
-    // const {id} = useParams()
     const axiosSecure = useAxiosSecure()
     const [bookingsData, setBookingData] = useState([])
     const [filterStatus, setFilterStatus] = useState('All')
@@ -29,13 +23,11 @@ const MyParcel = () => {
     const { data = {}, isLoading, refetch } = useQuery({
         queryKey: ['myParcel', user?.email],
         queryFn: async () => {
-            // const { data } = await axiosSecure.get(`/myParcel/${id}`)
             const { data } = await axiosSecure.get(`/myParcel/${user?.email}`)
             setBookingData(data)
             return data;
         }
     })
-    // console.log(bookingsData)
 
     // Status change to Cancel
     const handleCancel = async (id) => {
@@ -83,7 +75,6 @@ const MyParcel = () => {
         if (filterStatus === 'All') return true;
         return book.status === filterStatus;
     })
-    // console.log(handleFilter)
 
     // Review
     function open(id) {
@@ -143,7 +134,6 @@ const MyParcel = () => {
                                     <td>{item?.requestedDate}</td>
                                     <td>{item?.approximateDate}</td>
                                     <td>{item?.bookingDate}</td>
-                                    {/* <td className="w-full">{item._id}</td> */}
                                     <td>...{item._id.slice(16, 24)}</td>
                                     <td >{item?.status}</td>
                                     <td>

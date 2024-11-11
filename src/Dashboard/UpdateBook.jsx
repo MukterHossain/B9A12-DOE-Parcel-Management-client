@@ -2,13 +2,11 @@ import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import SectionTitle from "../Shared/SectionTitle";
 import useAuth from "../hooks/useAuth";
-// import useAxiosPublic from "../hooks/useAxiosPublic";
 import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import { useNavigate, useParams } from "react-router-dom";
-// import {  useState } from "react";
 import { useEffect } from "react";
 
 
@@ -16,7 +14,6 @@ const UpdateBook = () => {
     const { user } = useAuth()
     const {id} = useParams()
     const navigate = useNavigate()
-    // const [getUpdate, setGetUPdate] = useState('')
     const axiosSecure = useAxiosSecure()
 
     const { data: updateData = {}, isLoading} = useQuery({
@@ -36,45 +33,13 @@ const UpdateBook = () => {
         }
     },[reset,updateData])
 
-    // const [weights, setWeights] = useState(weight || 0)
-    // const [prices, setPrices] = useState(price || 0)
-    // console.log('weights, prices', weights, prices);
-    console.log('weight, price', weight, price);
-    
-    // const calculatePrice = (weights) =>{
-        
-    //     if(weights <= 1){
-    //         return 50;
-    //     }
-    //     else if(weights <=2){
-    //         return 100
-    //     }
-    //     else{
-    //         return 150
-    //     }
-        
-    // }
-
-//     const handlePriceChange = (e) => {
-//         e.preventDefault()
-//         const inputWeight = parseFloat(e.target.value) ;        
-//         setWeights(inputWeight);
-//         const newPrice = calculatePrice(inputWeight);  
-//         setPrices(newPrice); 
-//         console.log('Updated Weight:', inputWeight);
-//   console.log('Calculated Price:', newPrice);
-//       };
-
-
     const onSubmit = async (data) => {
-        // console.log(data)
         const updateInfo = {
             name:data.name,
             email:data.email,
             phone:data.phone,
             parcelType:data.parcelType,
             weight:data.weight,
-            // weight:data.weights,
             receiverName:data.receiverName,
             receiverPhone:data.receiverPhone,
             deliveryAddress:data.deliveryAddress,
@@ -82,7 +47,6 @@ const UpdateBook = () => {
             latitude:parseFloat(data.latitude),
             longitude:parseFloat(data.longitude),
             price: parseFloat(data.price),
-            // price: parseFloat(price),
         }
 
         try {

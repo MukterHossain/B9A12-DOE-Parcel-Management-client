@@ -9,10 +9,9 @@ const Reviews = () => {
     const axiosSecure = useAxiosSecure()
 
 
-    const { data:reviewItems = [], isLoading, refetch } = useQuery({
+    const { data:reviewItems = [], isLoading } = useQuery({
         queryKey: ['delivery-review'],
         queryFn: async () => {
-            // const { data } = await axiosSecure.get(`/myParcel/${id}`)
             const { data } = await axiosSecure.get(`/delivery-review`)
             return data;
         }
