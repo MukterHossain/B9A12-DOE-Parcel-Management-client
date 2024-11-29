@@ -49,7 +49,7 @@ const Dashboard = () => {
             <div className={`w-full flex justify-between`}>
                 <div className={`z-10   md:static flex flex-col justify-between overflow-x-hidden bg-gray-100 w-56 lg:w-64 space-y-6 px-2 py-2 absolute inset-y-0 left-0 transform ${!isActive && '-translate-x-full'
                     }  md:translate-x-0  transition duration-200 ease-in-out`}>
-                    <div className="flex flex-col min-h-screen justify-between  mt-2">
+                    <div className="flex flex-col  min-h-screen justify-between  mt-2">
                         <div className="">
                             <ul className="menu">
                                 {

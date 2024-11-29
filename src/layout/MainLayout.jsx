@@ -8,7 +8,7 @@ const MainLayout = () => {
     console.log(location)
     const noHeaderFooter = location.pathname.includes('login') || location.pathname.includes('signup')
     return (
-        <div className="max-w-screen-xl mx-auto">
+        <div className="max-w-screen-xl 2xl:max-w-screen-2xl  mx-auto">
             {noHeaderFooter || <Navbar></Navbar>}
             <div className="">
                 <Outlet></Outlet>

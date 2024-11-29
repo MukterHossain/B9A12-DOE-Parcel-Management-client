@@ -19,23 +19,23 @@ const Navbar = () => {
 
     const navOption = <>
         <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to={isAdmin ? `/dashboard/statistics`: isDeliveryMen ? '/dashboard/deliveryList': '/dashboard/bookParcel'}>Dashboard</NavLink></li>
+        <li><NavLink to={isAdmin ? `/dashboard/statistics` : isDeliveryMen ? '/dashboard/deliveryList' : '/dashboard/bookParcel'}>Dashboard</NavLink></li>
         <li><NavLink to='/contact'>Contact Us</NavLink></li>
     </>
 
-useEffect(() => {
-    localStorage.setItem('theme', theme)
-    const localTheme = localStorage.getItem('theme')
-    document.querySelector('html').setAttribute('data-theme', localTheme)
-}, [theme])
-const handleToggle = (e) => {
-    if (e.target.checked) {
-        setTheme('dark')
+    useEffect(() => {
+        localStorage.setItem('theme', theme)
+        const localTheme = localStorage.getItem('theme')
+        document.querySelector('html').setAttribute('data-theme', localTheme)
+    }, [theme])
+    const handleToggle = (e) => {
+        if (e.target.checked) {
+            setTheme('dark')
+        }
+        else {
+            setTheme('light')
+        }
     }
-    else {
-        setTheme('light')
-    }
-}
 
 
 
@@ -76,9 +76,8 @@ const handleToggle = (e) => {
 
                 <div className="navbar-end">
                     <div>
-                        <Link to="/dashboard/adminHome">
-                            <MdNotificationsActive className="text-xl mr-4"></MdNotificationsActive>
-                        </Link>
+                        <MdNotificationsActive className="text-xl mr-4">
+                        </MdNotificationsActive>
                     </div>
                     <div className="pr-2">
                         <label className="cursor-pointer grid place-items-center">
@@ -115,7 +114,7 @@ const handleToggle = (e) => {
                                         <>
                                             <h2 className="text-[16px]  block  px-4 pt-2 hover:bg-neutral-100 text-blue-800 transition font-bold">{user?.displayName}</h2>
                                             <Link
-                                                to={isAdmin ? `/dashboard/statistics`: isDeliveryMen ? '/dashboard/deliveryList': '/dashboard/bookParcel'}
+                                                to={isAdmin ? `/dashboard/statistics` : isDeliveryMen ? '/dashboard/deliveryList' : '/dashboard/bookParcel'}
                                                 className='block  px-4 py-3 hover:bg-neutral-100 text-black  transition font-semibold'
                                             >
                                                 Dashboard
