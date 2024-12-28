@@ -18,11 +18,11 @@ const DeliveryList = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [currentId, setCurrentId] = useState('')
 
-
+console.log(user.email)
     const { data: deliveryItems = [], isLoading, refetch } = useQuery({
         queryKey: ['deliveryList',],
         queryFn: async () => {
-            const { data } = await axiosSecure.get(`/deliveryList`)
+            const { data } = await axiosSecure.get(`/deliveryList?email=${user?.email}`)
             return data;
         }
     })
@@ -94,6 +94,7 @@ const DeliveryList = () => {
                         text: "Your status has been Delivered.",
                         icon: "success"
                     });
+                    console.log('updateData', updateData);
                 }
                 // refresh data
                 refetch()
@@ -107,9 +108,11 @@ const DeliveryList = () => {
                 icon: 'error',
                 confirmButtonText: 'Ok'
             })
+            console.log(error);
         }
 
     }
+    // console.log('user', user);
 
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
     return (
@@ -119,7 +122,7 @@ const DeliveryList = () => {
             </Helmet>
             <SectionTitle heading={"Delivery List"}></SectionTitle>
             <div>
-                <div className=" -mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                <div className=" -mx-4 sm:-mx-4 px-4 sm:px-8 py-4 overflow-x-auto">
                     <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
                         <table className="table">
                             {/* head */}
@@ -163,7 +166,7 @@ const DeliveryList = () => {
                                             </button>
                                         </td>
                                         <td>
-                                            <button onClick={() => handleDelivered(item?._id)} disabled={item?.status === 'Delivered'} className=" px-2 py-1 mx-1 text-gray-700 transition-colors 
+                                            <button onClick={() => handleDelivered(item?._id)} disabled={item?.status !== 'On The Way'} className=" px-2 py-1 mx-1 text-gray-700 transition-colors 
                                             disabled:text-green-500 duration-300  disabled:bg-gray-200 bg-purple-300 transform rounded-md hover:bg-blue-500 disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:text-white disabled:cursor-not-allowed">
                                                 <GrDeliver size={20}></GrDeliver>
                                             </button>

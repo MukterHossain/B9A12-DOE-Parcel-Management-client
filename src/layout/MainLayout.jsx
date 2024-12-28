@@ -10,7 +10,7 @@ const MainLayout = () => {
     return (
         <div className="max-w-screen-xl 2xl:max-w-screen-2xl  mx-auto">
             {noHeaderFooter || <Navbar></Navbar>}
-            <div className="">
+            <div className='min-h-[calc(100vh-130px)]'>
                 <Outlet></Outlet>
             </div>
             { noHeaderFooter || <Footer></Footer>}

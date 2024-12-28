@@ -110,7 +110,7 @@ const MyParcel = () => {
                         <option value="Cancel">Cancelled</option>
                     </select>
                 </div>
-                <div className=" -mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                <div className=" -mx-4 sm:-mx-4 px-4 sm:px-8 py-4 overflow-x-auto">
                     <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
                         <table className="table">
                             {/* head */}
@@ -154,7 +154,7 @@ const MyParcel = () => {
                                     </td>
                                     <td>
 
-                                        <button disabled={item?.status !== 'Pending'} onClick={() => open(item?._id)} className="px-2 py-1 mx-1 text-gray-700 transition-colors duration-300  disabled:bg-gray-200 bg-purple-300 transform rounded-md hover:bg-blue-500 disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:text-white disabled:cursor-not-allowed">
+                                        <button disabled={item?.status !== 'Delivered'} onClick={() => open(item?._id)} className="px-2 py-1 mx-1 text-gray-700 transition-colors duration-300  disabled:bg-gray-200 bg-purple-300 transform rounded-md hover:bg-blue-500 disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:text-white disabled:cursor-not-allowed">
                                             Review
                                         </button>
                                         <BookReview isOpen={isOpen} close={close} id={currentId} refetch={refetch}></BookReview>

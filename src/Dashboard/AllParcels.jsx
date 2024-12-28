@@ -26,6 +26,7 @@ const AllParcels = () => {
     },
     // enabled: false,
   })
+  console.log(parcelItem);
 
   function open(id) {
     setCurrentId(id)
@@ -40,12 +41,14 @@ const AllParcels = () => {
 
   // Manage Modal
   const { data: allDeliveryMen = [] } = useQuery({
-    queryKey: ['all-delivery-men/deliveryMen'],
+    queryKey: ['delivery-men'],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/all-delivery-men/deliveryMen`)
+      const { data } = await axiosSecure.get(`/delivery-men`)
       return data;
     }
   })
+  
+  console.log(allDeliveryMen);
   // // Handle Assign 
   const handleAssign = (id) => {
     if (!selectedMan || !deliveryDate) {
@@ -57,7 +60,8 @@ const AllParcels = () => {
       });
       return;
     }
-
+console.log(id);
+console.log(selectedMan)
 
     const deliveryMenInfo = {
       status: 'On The Way',
@@ -78,6 +82,7 @@ const AllParcels = () => {
       }).then(async (data) => {
         if (data.isConfirmed) {
           const { updateData } = await axiosSecure.put(`/deliveryMenUpdate/${id}`, deliveryMenInfo)
+          console.log('updateData', updateData);
           Swal.fire({
             title: "Changed!",
             text: "Your data has been Changed.",
@@ -91,6 +96,7 @@ const AllParcels = () => {
 
     }
     catch (error) {
+      console.log(error);
       Swal.fire({
         title: 'Error!',
         text: 'Data not Canceled',
@@ -127,7 +133,7 @@ const AllParcels = () => {
           </form>
         </div>
        
-        <div className=" -mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+        <div className=" -mx-4 sm:-mx-4 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
             <table className="table">
               {/* head */}

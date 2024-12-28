@@ -16,6 +16,8 @@ const AllDeliveryMen = () => {
             return data;
         }
     })
+    console.log(deliveryMens);
+    // console.log(deliveryMens?.totalDelivered);
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
     return (
         <div>
@@ -23,7 +25,7 @@ const AllDeliveryMen = () => {
                 <title>DOE Courier || All Delivery Men</title>
             </Helmet>
             <SectionTitle heading={"All Delivery Men"}></SectionTitle>
-        <div className=" -mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">           
+        <div className=" -mx-4 sm:-mx-4 px-4 sm:px-8 py-4 overflow-x-auto">           
             <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
                 <table className="table">
                     {/* head */}
@@ -38,12 +40,12 @@ const AllDeliveryMen = () => {
                     </thead>
                     <tbody>
                         {/* row 1 */}
-                        {deliveryMens.map((item, index) =><tr key={item._id}>
+                        {deliveryMens?.map((item, index) =><tr key={item._id}>
                             <td>{index + 1}</td>
                             <td>{item?.name} </td>
                             <td>{item?.phone} </td>
-                            <td>{item?.numberParcelDelivered || 0} </td>
-                            <td>{item?.averageReview || 0} </td>
+                            <td>{item?.parcelsDelivered || 0} </td>
+                            <td>{item?.avgReview || 0} </td>
                         </tr> )}
                         
                     </tbody>

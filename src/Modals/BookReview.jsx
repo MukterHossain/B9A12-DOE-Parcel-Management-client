@@ -5,12 +5,23 @@ import Swal from 'sweetalert2';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import useAuth from '../hooks/useAuth';
 import { useForm } from 'react-hook-form';
+import { useQuery } from '@tanstack/react-query';
 
 
 const BookReview = ({ isOpen, close ,id,refetch}) => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const { register, handleSubmit } = useForm()
+    
+    const { data: reviewMenData = [] } = useQuery({
+        queryKey: ['reviewMen',user?.email ],
+        queryFn: async () => {
+          const { data } = await axiosSecure.get(`/reviewMen?email=${user?.email}`)
+          return data;
+        }
+      })
+    console.log(reviewMenData);
+    // console.log('reviewMenData',reviewMenData[0]?.deliveryMenId);
 
     // Review submit
     const handleReviewSubmit = async (data) => {
@@ -100,10 +111,6 @@ const BookReview = ({ isOpen, close ,id,refetch}) => {
                                                 <input type="text" defaultValue={user?.photoURL}
                                                     {...register("image", { required: true })} className="input input-bordered w-full " />
                                             </div>
-
-                                            {/* <div>
-                                                <input type="number" step="0.1" min="0" max="5" value={rating} onChange={handleInputChange} name='rating' placeholder="Rate between 0 to 5" className="input input-bordered w-full" required />
-                                            </div> */}
                                             <div className="form-control w-full">
                                                 <div className="label">
                                                     <label htmlFor="rating">Rating</label>
